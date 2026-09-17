@@ -1,0 +1,248 @@
+html,
+body,
+#root {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+:root {
+  color-scheme: light;
+  --pptx-shell-background: #fff;
+  --pptx-shell-foreground: #0f1115;
+  --pptx-shell-muted: #61666b;
+  --pptx-shell-border: #0000001a;
+  --pptx-shell-hover: #2631480f;
+  --pptx-shell-active: #2631481a;
+  --pptx-shell-primary: #0f1115;
+  --pptx-shell-ring: #4176e6;
+  --pptx-shell-destructive: #f25a5a;
+  --pptx-shell-radius: 10px;
+  --pptx-shell-panel-gap: 8px;
+  --pptx-plugin-feedback-layer: 20;
+  --pptx-plugin-busy-layer: 10;
+  scrollbar-color: var(--pptx-shell-muted) var(--pptx-shell-background);
+  scrollbar-width: thin;
+}
+body {
+  background: var(--pptx-shell-background);
+  color: var(--pptx-shell-foreground);
+  font:
+    13px/1.5 system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'PingFang SC',
+    'Microsoft YaHei',
+    sans-serif;
+}
+.pptx-app {
+  position: relative;
+  box-sizing: border-box;
+  height: 100%;
+  padding-top: var(--pptx-shell-panel-gap);
+  display: flex;
+  flex-direction: column;
+  isolation: isolate;
+}
+.pptx-connection {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.pptx-control,
+.pptx-empty button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 32px;
+  padding: 0 9px;
+  border: 1px solid var(--pptx-shell-border);
+  border-radius: var(--pptx-shell-radius, 10px);
+  font: inherit;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--pptx-shell-foreground);
+  background: transparent;
+  cursor: pointer;
+}
+.pptx-control svg {
+  flex-shrink: 0;
+}
+.pptx-control:hover:not(:disabled),
+.pptx-empty button:hover {
+  background: var(--pptx-shell-hover);
+}
+.pptx-control:active:not(:disabled),
+.pptx-empty button:active {
+  background: var(--pptx-shell-active);
+}
+.pptx-control:focus-visible,
+.pptx-empty button:focus-visible {
+  outline: 2px solid var(--pptx-shell-ring);
+  outline-offset: 2px;
+}
+.pptx-control:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.pptx-mark {
+  color: var(--pptx-shell-primary);
+}
+.pptx-connection {
+  padding: 4px 12px;
+  min-height: 32px;
+  background: var(--pptx-shell-background);
+  border-bottom: 1px solid var(--pptx-shell-border);
+  gap: 5px;
+  font-size: 12px;
+  color: var(--pptx-shell-muted);
+}
+.pptx-connection[hidden] {
+  display: none;
+}
+.pptx-connection[data-state='offline'] {
+  color: var(--pptx-shell-foreground);
+}
+.pptx-reconnect {
+  border-color: transparent;
+  padding: 0 6px;
+  min-height: 28px;
+}
+.pptx-empty {
+  margin: auto;
+  text-align: center;
+  padding: 32px;
+}
+.pptx-empty h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 16px 0 8px;
+}
+.pptx-empty p,
+.pptx-empty small {
+  color: var(--pptx-shell-muted);
+}
+.pptx-empty small {
+  display: block;
+  margin-top: 32px;
+}
+.pptx-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--pptx-shell-border);
+  background: var(--pptx-shell-background);
+  border-radius: 12px;
+  font-size: 36px;
+  font-weight: 700;
+}
+.pptx-empty button {
+  margin-top: 20px;
+  padding: 0 16px;
+  min-height: 36px;
+  background: var(--pptx-shell-background);
+  border-color: var(--pptx-shell-border);
+}
+.pptx-error {
+  position: absolute;
+  z-index: var(--pptx-plugin-feedback-layer);
+  bottom: 40px;
+  right: 12px;
+  width: min(440px, calc(100% - 24px));
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-height: min(160px, 35%);
+  overflow: auto;
+  background: var(--pptx-shell-background);
+  color: var(--pptx-shell-foreground);
+  border: 1px solid var(--pptx-shell-destructive);
+  border-radius: var(--pptx-shell-radius, 10px);
+  box-shadow: 0 8px 24px #0003;
+  padding: 8px 10px 8px 14px;
+}
+.pptx-error > span {
+  flex: 1;
+  padding-top: 6px;
+  overflow-wrap: anywhere;
+}
+.pptx-error button {
+  border-color: transparent;
+  flex-shrink: 0;
+}
+.pptx-editor {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  isolation: isolate;
+}
+.pptx-busy {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--pptx-shell-background) 80%, transparent);
+  display: grid;
+  place-items: center;
+  z-index: var(--pptx-plugin-busy-layer);
+}
+.pptx-spin {
+  animation: pptx-spin 1s linear infinite;
+}
+@keyframes pptx-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 600px) {
+  .pptx-control {
+    padding-inline: 7px;
+  }
+  .pptx-connection > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .pptx-connection {
+    position: relative;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pptx-spin {
+    animation: none;
+  }
+}
+@media (forced-colors: active) {
+  :root {
+    scrollbar-color: auto;
+  }
+  .pptx-control {
+    border-color: ButtonText;
+  }
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--pptx-shell-background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--pptx-shell-border);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pptx-shell-muted);
+}
+::-webkit-scrollbar-thumb:active {
+  background: var(--pptx-shell-foreground);
+}

@@ -149,23 +149,41 @@ export async function findBrowserEvidence(current, io, now = Date.now) {
           }
         }
       }
-      if (!related || !hasBrowserExecution(await io.jobs(run))) continue;
-      const record = await io.evidence(run);
-      if (!record || !matchingEvidence(record, run, current)) continue;
-      if (run.event === 'push') {
-        if (record.testedCommit !== run.head_sha) continue;
-      } else {
-        const parents = await io.parents(record.testedCommit);
-        if (
-          parents.length !== 2 ||
-          !isCommit(parents[0]) ||
-          parents[1] !== run.head_sha
-        )
-          continue;
+      if (!related) continue;
+      // Rerunning a different failed job advances the run attempt without
+      // rerunning successful browser checks. Keep their original identity.
+      for (
+        let attempt = run.run_attempt;
+        attempt >= Math.max(1, run.run_attempt - 4);
+        attempt--
+      ) {
+        if (now() >= deadline)
+          return {
+            reason:
+              'Evidence lookup budget reached; running browser regression.',
+          };
+        const witnessRun = { ...run, run_attempt: attempt };
+        if (!hasBrowserExecution(await io.jobs(witnessRun))) continue;
+        const record = await io.evidence(witnessRun);
+        if (!record || !matchingEvidence(record, witnessRun, current)) continue;
+        if (run.event === 'push') {
+          if (record.testedCommit !== run.head_sha) continue;
+        } else {
+          const parents = await io.parents(record.testedCommit);
+          if (
+            parents.length !== 2 ||
+            !isCommit(parents[0]) ||
+            parents[1] !== run.head_sha
+          )
+            continue;
+        }
+        // PR checks execute the synthetic merge tree, not just the branch head.
+        if ((await io.source(record.testedCommit)) !== current.source) continue;
+        return {
+          run: witnessRun,
+          reason: `Identical browser inputs and built assets (attempt ${attempt}).`,
+        };
       }
-      // PR checks execute the synthetic merge tree, not just the branch head.
-      if ((await io.source(record.testedCommit)) !== current.source) continue;
-      return { run, reason: 'Identical browser inputs and built assets.' };
     } catch {
       unavailable = true;
     }

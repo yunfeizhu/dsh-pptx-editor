@@ -145,9 +145,10 @@ after each checkout's normal checks/build. It compares a conservative Git input
 digest (only known documentation and version metadata excluded), all built
 files, and the runner/Node environment. It recomputes candidate Git inputs
 instead of trusting an uploaded digest alone. GitHub must confirm the exact
-successful same-repository CI run/attempt and actual browser/record steps. The
-source must be an ancestor main run, an earlier head in the same PR branch, or a
-PR whose main merge is an ancestor of the current checkout.
+successful same-repository CI run and actual browser/record steps in the exact
+producer attempt. The source must be an ancestor main run, an earlier head in
+the same PR branch, or a PR whose main merge is an ancestor of the current
+checkout.
 
 PR evidence checks both its branch head and actual tested synthetic merge input
 hashes, including the two-parent merge relationship to that head. Push evidence
@@ -155,6 +156,13 @@ must test its exact run commit. A matching artifact digest alone is
 insufficient. This intentionally rejects stale-branch evidence when only its
 merge tree matches: the producer's branch inputs must also be verifiable as
 unchanged.
+
+Rerunning a different failed job advances GitHub's run attempt while retaining
+successful browser checks in their original attempt. Search at most five
+attempts per successful run, matching each job and artifact to that exact
+attempt. The overall latest run must still be successful. Keep the one-minute
+lookup bound; do not relabel an old artifact as a newer attempt. This preserves
+completed browser evidence without weakening the source, asset or job checks.
 
 Only actual browser execution creates a 14-day JSON witness. Reused jobs cannot
 create chained witnesses. Failed, fork, unrelated, manual, expired or mismatched

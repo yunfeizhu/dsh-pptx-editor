@@ -72,8 +72,8 @@ dependencies, toolchain, build/test scripts and workflows remain inputs. The
 runner image/version, Node version, platform and architecture must also match.
 Even a metadata-only change runs browsers if the resulting build differs.
 
-A successful full browser run uploads a small JSON record for 14 days. CI can
-reuse it only after checking GitHub's successful run/attempt and actual browser
+A successful browser job uploads a small JSON record for 14 days. CI can reuse
+it only after checking GitHub's overall successful run and actual browser
 execution steps, recomputing the candidate's Git input hash, and matching the
 built bytes and environment. Sources must be this repository's `ci.yml`:
 
@@ -88,14 +88,20 @@ its second parent; push evidence must name the exact run commit. Unavailable
 merge commits fail closed. This conservative producer check can rerun browsers
 for a stale PR branch whose head differs even if its merge tree would match.
 
+When only a different failed job is rerun, the browser witness stays attached to
+its original attempt. CI checks up to five attempts, newest first, and requires
+the successful browser job and its artifact to name the same attempt. The
+overall run must have completed successfully; a failed or cancelled latest run
+cannot supply evidence from an older attempt.
+
 Fork runs, unrelated or unmerged PRs, manual runs, failed/cancelled runs and
-records for another attempt cannot supply evidence. A reused run does not upload
-another browser record: subsequent jobs trace back to the run that actually
-executed the tests. Artifact contents are bounded JSON data, never executable
-code. Read failures, expired/missing evidence or mismatches fall back to full
-browser regression. The lookup considers at most 30 recent successful runs and
-stops starting further candidates after one minute. Manual CI deliberately
-forces a fresh browser run.
+records that do not match the checked attempt cannot supply evidence. A reused
+run does not upload another browser record: subsequent jobs trace back to the
+run that actually executed the tests. Artifact contents are bounded JSON data,
+never executable code. Read failures, expired/missing evidence or mismatches
+fall back to full browser regression. The lookup considers at most 30 recent
+successful runs and stops starting further candidates or attempts after one
+minute. Manual CI deliberately forces a fresh browser run.
 
 The job summary states whether browser regression ran or was reused and links
 the source run. For unchanged inputs, a feature PR, its merge, the subsequent

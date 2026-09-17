@@ -140,6 +140,55 @@ it('reuses an earlier successful input on the same PR branch after a docs-only c
   expect(io.ancestor).toHaveBeenCalledWith(tested, next);
 });
 
+it('reuses the original browser attempt after only a different failed job was rerun', async () => {
+  const io = ioFor({
+    runs: async () => [{ ...candidate, run_attempt: 2 }],
+    jobs: vi.fn(async (run) =>
+      run.run_attempt === 1
+        ? completedJobs
+        : [{ name: 'Dependency review', conclusion: 'success' }],
+    ),
+  });
+  const result = await findBrowserEvidence(current, io);
+  expect(result.run).toEqual(candidate);
+  expect(result.reason).toContain('attempt 1');
+  expect(io.jobs.mock.calls.map(([run]) => run.run_attempt)).toEqual([2, 1]);
+  expect(io.evidence).toHaveBeenCalledExactlyOnceWith(candidate);
+});
+
+it.each(['failed browser job', 'mismatched artifact attempt'])(
+  'rejects an earlier attempt with %s',
+  async (failure) => {
+    const io = ioFor({
+      runs: async () => [{ ...candidate, run_attempt: 2 }],
+      jobs: async (run) =>
+        run.run_attempt === 1
+          ? completedJobs.map((job) => ({
+              ...job,
+              conclusion:
+                failure === 'failed browser job' ? 'failure' : 'success',
+            }))
+          : [],
+      evidence: vi.fn(async () => ({ ...record, runAttempt: '2' })),
+    });
+    expect((await findBrowserEvidence(current, io)).run).toBeUndefined();
+    expect(io.evidence).toHaveBeenCalledTimes(
+      failure === 'failed browser job' ? 0 : 1,
+    );
+  },
+);
+
+it('checks at most five attempts per successful run', async () => {
+  const io = ioFor({
+    runs: async () => [{ ...candidate, run_attempt: 10 }],
+    jobs: vi.fn(async () => []),
+  });
+  expect((await findBrowserEvidence(current, io)).run).toBeUndefined();
+  expect(io.jobs.mock.calls.map(([run]) => run.run_attempt)).toEqual([
+    10, 9, 8, 7, 6,
+  ]);
+});
+
 it('accepts an ancestral main run but never an unrelated main commit', async () => {
   const mainRun = { ...candidate, event: 'push', head_branch: 'main' };
   const io = ioFor({

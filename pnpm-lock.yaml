@@ -16,12 +16,12 @@ importers:
   .:
     dependencies:
       zod:
-        specifier: 4.5.2
-        version: 4.5.2
+        specifier: 4.6.5
+        version: 4.6.5
     devDependencies:
       '@ai-sdk/react':
         specifier: 4.0.102
-        version: 4.0.102(react@19.3.0)(zod@4.5.2)
+        version: 4.0.102(react@19.3.0)(zod@4.6.5)
       '@deepseek-ai/cordis':
         specifier: 4.0.2
         version: 4.0.2
@@ -123,7 +123,7 @@ importers:
         version: 1.6.27(@typescript-eslint/eslint-plugin@8.70.0(@typescript-eslint/parser@8.70.0(eslint@10.10.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(eslint@10.10.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(eslint@10.10.0(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)(vitest@4.1.11)
       ai:
         specifier: 7.0.99
-        version: 7.0.99(zod@4.5.2)
+        version: 7.0.99(zod@4.6.5)
       esbuild:
         specifier: 0.28.2
         version: 0.28.2
@@ -168,7 +168,7 @@ importers:
         version: 0.23.2(supports-color@7.2.0)
       pptx-react-viewer:
         specifier: 3.19.2
-        version: 3.19.2(patch_hash=f4c0d0ace6f0e2c519db5cd55e35c8fc3ff3b2d38d0277f7e9bf5d541be01d42)(@ai-sdk/react@4.0.102(react@19.3.0)(zod@4.5.2))(ai@7.0.99(zod@4.5.2))(fast-xml-parser@5.10.1)(framer-motion@13.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(i18next@26.3.6(typescript@6.0.3))(jspdf@4.2.1)(jszip@3.10.1)(lucide-react@1.24.0(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react-i18next@17.0.9(i18next@26.3.6(typescript@6.0.3))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(typescript@6.0.3))(react-icons@5.7.0(react@19.3.0))(react@19.3.0)(supports-color@7.2.0)
+        version: 3.19.2(patch_hash=f4c0d0ace6f0e2c519db5cd55e35c8fc3ff3b2d38d0277f7e9bf5d541be01d42)(@ai-sdk/react@4.0.102(react@19.3.0)(zod@4.6.5))(ai@7.0.99(zod@4.6.5))(fast-xml-parser@5.10.1)(framer-motion@13.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(i18next@26.3.6(typescript@6.0.3))(jspdf@4.2.1)(jszip@3.10.1)(lucide-react@1.24.0(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react-i18next@17.0.9(i18next@26.3.6(typescript@6.0.3))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(typescript@6.0.3))(react-icons@5.7.0(react@19.3.0))(react@19.3.0)(supports-color@7.2.0)
       pptxgenjs:
         specifier: 4.0.1
         version: 4.0.1
@@ -2853,44 +2853,47 @@ packages:
   zod@4.5.2:
     resolution: {integrity: sha512-XkYXCol10+ba/6F/cueWV+TezUeOqXW0hdeJt5CdXjTYeAgAQg5N03RQdJ80mhfFE72+pblvYMW4wy2Qp4Qbrg==}
 
+  zod@4.6.5:
+    resolution: {integrity: sha512-v5l/aFXZQeai4awLbOpSoHecE9UiMrnfx75tEXLjNonXVARxQ5mOeipTjROUchszUNCqnE+hqAMujRsRHsut2Q==}
+
 snapshots:
 
   '@acemir/cssom@0.9.31': {}
 
-  '@ai-sdk/gateway@4.0.80(zod@4.5.2)':
+  '@ai-sdk/gateway@4.0.80(zod@4.6.5)':
     dependencies:
       '@ai-sdk/provider': 4.0.14
-      '@ai-sdk/provider-utils': 5.0.40(zod@4.5.2)
+      '@ai-sdk/provider-utils': 5.0.40(zod@4.6.5)
       '@vercel/oidc': 3.2.0
-      zod: 4.5.2
+      zod: 4.6.5
 
-  '@ai-sdk/mcp@2.0.49(zod@4.5.2)':
+  '@ai-sdk/mcp@2.0.49(zod@4.6.5)':
     dependencies:
       '@ai-sdk/provider': 4.0.14
-      '@ai-sdk/provider-utils': 5.0.40(zod@4.5.2)
+      '@ai-sdk/provider-utils': 5.0.40(zod@4.6.5)
       cross-spawn: 7.0.6
       pkce-challenge: 5.0.1
-      zod: 4.5.2
+      zod: 4.6.5
 
-  '@ai-sdk/provider-utils@5.0.40(zod@4.5.2)':
+  '@ai-sdk/provider-utils@5.0.40(zod@4.6.5)':
     dependencies:
       '@ai-sdk/provider': 4.0.14
       '@standard-schema/spec': 1.1.0
       '@workflow/serde': 4.1.0
       eventsource-parser: 3.1.1
       undici: 7.29.1
-      zod: 4.5.2
+      zod: 4.6.5
 
   '@ai-sdk/provider@4.0.14':
     dependencies:
       json-schema: 0.4.0
 
-  '@ai-sdk/react@4.0.102(react@19.3.0)(zod@4.5.2)':
+  '@ai-sdk/react@4.0.102(react@19.3.0)(zod@4.6.5)':
     dependencies:
-      '@ai-sdk/mcp': 2.0.49(zod@4.5.2)
+      '@ai-sdk/mcp': 2.0.49(zod@4.6.5)
       '@ai-sdk/provider': 4.0.14
-      '@ai-sdk/provider-utils': 5.0.40(zod@4.5.2)
-      ai: 7.0.99(zod@4.5.2)
+      '@ai-sdk/provider-utils': 5.0.40(zod@4.6.5)
+      ai: 7.0.99(zod@4.6.5)
       react: 19.3.0
       swr: 2.5.1(react@19.3.0)
       throttleit: 2.1.0
@@ -3010,7 +3013,7 @@ snapshots:
       '@deepseek-ai/dsh-util-values': 0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)
       '@deepseek-ai/schemastery': 3.18.2
       mime-types: 3.0.2
-      zod: 4.5.2
+      zod: 4.6.5
 
   '@deepseek-ai/dsh-attachment@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-brand@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2))':
     dependencies:
@@ -3026,7 +3029,7 @@ snapshots:
       '@deepseek-ai/cordis': 4.0.2
       '@deepseek-ai/dsh-credentials': 0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-invariants@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2))
       '@deepseek-ai/schemastery': 3.18.2
-      zod: 4.5.2
+      zod: 4.6.5
     transitivePeerDependencies:
       - '@deepseek-ai/dsh-invariants'
 
@@ -3096,7 +3099,7 @@ snapshots:
       '@deepseek-ai/dsh-util-crypto': 0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)
       '@deepseek-ai/dsh-util-values': 0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)
       '@deepseek-ai/schemastery': 3.18.2
-      zod: 4.5.2
+      zod: 4.6.5
 
   '@deepseek-ai/dsh-scope@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-invariants@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2))':
     dependencies:
@@ -3107,7 +3110,7 @@ snapshots:
     dependencies:
       '@deepseek-ai/cordis': 4.0.2
       '@deepseek-ai/dsh-session': 0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-scope@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-invariants@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)))
-      zod: 4.5.2
+      zod: 4.6.5
 
   '@deepseek-ai/dsh-session-query@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-brand@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2))(@deepseek-ai/dsh-llm@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2))(@deepseek-ai/dsh-session-projection@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-session@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-scope@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-invariants@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)))))(@deepseek-ai/dsh-session@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-scope@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-invariants@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2))))':
     dependencies:
@@ -3673,12 +3676,12 @@ snapshots:
 
   agent-base@7.1.4: {}
 
-  ai@7.0.99(zod@4.5.2):
+  ai@7.0.99(zod@4.6.5):
     dependencies:
-      '@ai-sdk/gateway': 4.0.80(zod@4.5.2)
+      '@ai-sdk/gateway': 4.0.80(zod@4.6.5)
       '@ai-sdk/provider': 4.0.14
-      '@ai-sdk/provider-utils': 5.0.40(zod@4.5.2)
-      zod: 4.5.2
+      '@ai-sdk/provider-utils': 5.0.40(zod@4.6.5)
+      zod: 4.6.5
 
   ajv-formats@3.0.1:
     dependencies:
@@ -4921,7 +4924,7 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  pptx-react-viewer@3.19.2(patch_hash=f4c0d0ace6f0e2c519db5cd55e35c8fc3ff3b2d38d0277f7e9bf5d541be01d42)(@ai-sdk/react@4.0.102(react@19.3.0)(zod@4.5.2))(ai@7.0.99(zod@4.5.2))(fast-xml-parser@5.10.1)(framer-motion@13.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(i18next@26.3.6(typescript@6.0.3))(jspdf@4.2.1)(jszip@3.10.1)(lucide-react@1.24.0(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react-i18next@17.0.9(i18next@26.3.6(typescript@6.0.3))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(typescript@6.0.3))(react-icons@5.7.0(react@19.3.0))(react@19.3.0)(supports-color@7.2.0):
+  pptx-react-viewer@3.19.2(patch_hash=f4c0d0ace6f0e2c519db5cd55e35c8fc3ff3b2d38d0277f7e9bf5d541be01d42)(@ai-sdk/react@4.0.102(react@19.3.0)(zod@4.6.5))(ai@7.0.99(zod@4.6.5))(fast-xml-parser@5.10.1)(framer-motion@13.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(i18next@26.3.6(typescript@6.0.3))(jspdf@4.2.1)(jszip@3.10.1)(lucide-react@1.24.0(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react-i18next@17.0.9(i18next@26.3.6(typescript@6.0.3))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(typescript@6.0.3))(react-icons@5.7.0(react@19.3.0))(react@19.3.0)(supports-color@7.2.0):
     dependencies:
       clsx: 2.1.1
       dompurify: 3.4.15
@@ -4940,8 +4943,8 @@ snapshots:
       react-icons: 5.7.0(react@19.3.0)
       tailwind-merge: 3.7.0
     optionalDependencies:
-      '@ai-sdk/react': 4.0.102(react@19.3.0)(zod@4.5.2)
-      ai: 7.0.99(zod@4.5.2)
+      '@ai-sdk/react': 4.0.102(react@19.3.0)(zod@4.6.5)
+      ai: 7.0.99(zod@4.6.5)
       three: 0.186.0
       y-webrtc: 10.3.0(supports-color@7.2.0)(yjs@13.6.32)
       y-websocket: 3.1.0(yjs@13.6.32)
@@ -5499,3 +5502,5 @@ snapshots:
       zod: 4.5.2
 
   zod@4.5.2: {}
+
+  zod@4.6.5: {}

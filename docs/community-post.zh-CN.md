@@ -5,10 +5,10 @@
 > 非官方项目，由社区成员独立开发和维护，与 DeepSeek 无隶属关系，也不代表官方推荐。
 
 [项目与源码](https://github.com/yunfeizhu/dsh-pptx-editor) ·
-[版本](https://github.com/yunfeizhu/dsh-pptx-editor/releases) ·
+[npm 包](https://www.npmjs.com/package/dsh-pptx-editor) ·
 [使用说明](https://github.com/yunfeizhu/dsh-pptx-editor/blob/main/docs/usage.zh-CN.md)
 
-> 草稿：1.0.0 尚未发布，待正式发布后再更新安装命令并发帖。
+> 草稿：发帖前核对 npm 包和安装步骤。
 
 ## 能做什么
 
@@ -32,13 +32,7 @@ _编辑器示例：浏览器回归测试使用的合成演示文稿。_
 先安装 Node 24 并配置 DeepSeek Harness：
 
 ```sh
-git clone https://github.com/yunfeizhu/dsh-pptx-editor.git
-cd dsh-pptx-editor
-corepack enable
-pnpm install --frozen-lockfile
-pnpm build
-pnpm check:package
-dsh plugin --profile web add ./.cache/packages/dsh-pptx-editor-1.0.0.tgz
+dsh plugin --profile web add dsh-pptx-editor@1.0.0
 dsh web
 ```
 

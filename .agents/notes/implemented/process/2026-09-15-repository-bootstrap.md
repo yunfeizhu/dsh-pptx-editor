@@ -212,3 +212,19 @@ names unchanged. The old npm package remains separate and must be removed before
 loading the renamed plugin. Preserve native browser AutoSave recovery keys and
 migrate explicit panel-dismissal preferences so renaming does not discard
 recovery data or reopen deliberately closed panels.
+
+## First publication without a GitHub Release (2026-09-17)
+
+An explicitly authorized npm-only first publication may consume the sealed
+artifact directly from successful main-push CI. Verify repository, workflow, run
+attempt, main commit, package identity and checksums using the same artifact
+policy. Publish those exact bytes interactively, then compare registry integrity
+and perform a clean installation. Do not create a GitHub Release or tag when
+that destination is outside the authorization. This initial manual publication
+has no GitHub Actions provenance; future OIDC setup remains a separate external
+configuration. Deleting the former npm name requires its own explicit owner
+request and is subject to npm's unpublish policy.
+
+Requiring a draft GitHub Release for every first publish would create an
+unrequested remote artifact. Publishing a fresh local rebuild would instead lose
+the CI-to-package identity guarantee; neither is necessary here.

@@ -180,6 +180,15 @@ OIDC workflow directly instead. Consult the current
 [npm documentation](https://docs.npmjs.com/trusted-publishers/) when setting it
 up.
 
+If the owner authorizes an npm-only first publication without a GitHub Release,
+download the sealed package directly from the successful main-push CI artifact.
+Verify the same repository, workflow, run attempt, exact main commit, manifest
+and checksum fields before publishing those bytes. Do not create a tag or GitHub
+Release solely to route this exception through the normal workflow. Retain the
+CI artifact metadata and compare npm's published integrity with the verified
+tarball. Later automated publication still requires configuring the new
+package's trusted publisher.
+
 ## Workflow maintenance
 
 Pin Actions by full commit SHA, disable checkout credential persistence, use
@@ -200,10 +209,11 @@ GitHub account and GitHub no-reply commit email. Old PR, Issue, commit and tag
 identifiers are not part of the new repository. Retain previous release notes as
 historical package information without linking them to unrelated new IDs.
 
-Version 1.0.0 is prepared for a later release. Build and verify once in
-main-push CI, then wait for explicit release authorization after the next
-content changes. No tag, GitHub release or npm publication is created by this
-history rebuild. The existing npm versions and their provenance remain
-unchanged. Before a later npm release, recheck the trusted publisher against the
-new repository identity and protected npm environment; matching repository names
+The history rebuild prepared version 1.0.0 for a later release. At that stage,
+the owner authorized building and verifying in main-push CI, without creating a
+tag, GitHub Release or npm publication. Existing npm versions and their
+provenance were unchanged by the rebuild. The subsequent rename and separately
+authorized npm-only publication follow the first-publication procedure above.
+Before automated npm publication, recheck the trusted publisher against the new
+repository identity and protected npm environment; matching repository names
 alone do not establish working OIDC publication.

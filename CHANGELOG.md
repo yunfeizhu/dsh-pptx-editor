@@ -4,6 +4,7 @@
 
 ### English
 
+- Rename the project and package to `dsh-pptx-editor`.
 - Re-establish the repository with focused module commits and GitHub account
   attribution. Plugin runtime behavior is unchanged from 0.2.0.
 - Prepare the 1.0.0 build without publishing a release. The npm package remains
@@ -11,6 +12,7 @@
 
 ### 简体中文
 
+- 项目和插件包统一更名为 `dsh-pptx-editor`。
 - 按模块重新建立仓库提交记录，使用 GitHub 账号署名；插件运行功能与 0.2.0 相同。
 - 准备 1.0.0 构建，暂不发布 Release 或 npm 包；npm 继续保留 0.2.0。
 
@@ -69,7 +71,7 @@
 - Follow DSH's language and provide Chinese and English documentation.
 - Distribute a prebuilt DSH bundle with authenticated, conversation-scoped
   attachment access. See the
-  [capability limits](https://github.com/yunfeizhu/dsh-pptx-viewer/blob/main/docs/capabilities.md).
+  [capability limits](https://github.com/yunfeizhu/dsh-pptx-editor/blob/main/docs/capabilities.md).
 
 ### 简体中文
 
@@ -77,4 +79,4 @@
 - 新增和管理幻灯片、文本、形状、表格、图表及上传的图片；修改格式和对齐，共用撤销与重做。
 - 切换面板时保留编辑器，刷新后提供浏览器自动保存恢复；通过组件保存按钮下载编辑后的 PPTX。
 - 跟随 DSH 的语言，提供中英文文档。
-- 提供预先构建的 DSH 安装包，附件读取经过身份校验并限定在当前对话。详见[能力边界](https://github.com/yunfeizhu/dsh-pptx-viewer/blob/main/docs/capabilities.zh-CN.md)。
+- 提供预先构建的 DSH 安装包，附件读取经过身份校验并限定在当前对话。详见[能力边界](https://github.com/yunfeizhu/dsh-pptx-editor/blob/main/docs/capabilities.zh-CN.md)。

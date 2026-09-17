@@ -18,8 +18,8 @@ const requiredFiles = [
 export function validatePackage(pkg, patch, entries) {
   const errors = [];
   const files = new Set(entries.map((entry) => entry.path));
-  if (pkg.name !== 'dsh-pptx-viewer' || pkg.private === true)
-    errors.push('Package must be the public dsh-pptx-viewer bundle.');
+  if (pkg.name !== 'dsh-pptx-editor' || pkg.private === true)
+    errors.push('Package must be the public dsh-pptx-editor bundle.');
   if (!/^\d+\.\d+\.\d+$/.test(pkg.version ?? ''))
     errors.push('Use a stable three-part release version.');
   if (pkg.dsh?.bundle?.patch !== './cordis.patch.yml')

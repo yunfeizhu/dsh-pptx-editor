@@ -20,6 +20,6 @@ export function verifyReleaseTarget(tag, commit) {
   git('merge-base', '--is-ancestor', commit, 'origin/main');
   const pkg = JSON.parse(git('show', `${commit}:package.json`));
   validateReleaseIdentity(tag, commit, pkg.version);
-  if (pkg.name !== 'dsh-pptx-viewer' || pkg.private === true)
+  if (pkg.name !== 'dsh-pptx-editor' || pkg.private === true)
     throw new Error('Release target is not the public plugin package.');
 }

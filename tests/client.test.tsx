@@ -141,7 +141,7 @@ it('registers a session-bound editor without a start-page guide, with scoped cle
   apply(ctx as unknown as Context);
   expect(typeRegister).toHaveBeenCalledOnce();
   expect(register).toHaveBeenCalledWith(
-    { name: 'sidebar.right.pane.tab', key: 'dsh-pptx-viewer' },
+    { name: 'sidebar.right.pane.tab', key: 'dsh-pptx-editor' },
     PptxPanel,
   );
 });
@@ -263,7 +263,7 @@ it('keeps a legacy owner on its old UI until reopening, then upgrades and waits 
   host.append(frame);
   const registry = Reflect.get(
     document,
-    Symbol.for('dsh-pptx-viewer.panel-registry.v1'),
+    Symbol.for('dsh-pptx-editor.panel-registry.v1'),
   ) as Map<string, typeof entry>;
   registry.set('legacy-recovery', entry);
   // The old module's still-live callback replaces its notice's contents on close.

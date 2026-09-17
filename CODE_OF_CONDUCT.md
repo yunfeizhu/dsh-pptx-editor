@@ -2,7 +2,7 @@
 
 [English](CODE_OF_CONDUCT.md) | [简体中文](CODE_OF_CONDUCT.zh-CN.md)
 
-dsh-pptx-viewer aims to provide a welcoming, respectful community grounded in
+dsh-pptx-editor aims to provide a welcoming, respectful community grounded in
 technical evidence. This policy applies to project issues, pull requests,
 discussions, and other community spaces maintained by the project.
 
@@ -21,7 +21,7 @@ disruption, and sharing private information without permission are not allowed.
 ## Reporting and enforcement
 
 For a private report to maintainers, use the repository's
-[private reporting form](https://github.com/yunfeizhu/dsh-pptx-viewer/security/advisories/new).
+[private reporting form](https://github.com/yunfeizhu/dsh-pptx-editor/security/advisories/new).
 If the form is unavailable, open an issue requesting a private contact method
 without including names, allegations, or other sensitive details. Do not publish
 private evidence in an issue or PR.

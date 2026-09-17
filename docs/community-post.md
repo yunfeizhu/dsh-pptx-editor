@@ -1,13 +1,16 @@
-# DSH | dsh-pptx-viewer | Edit PowerPoint presentations through conversation
+# DSH | dsh-pptx-editor | Edit PowerPoint presentations through conversation
 
 [English](community-post.md) · [简体中文](community-post.zh-CN.md)
 
 > Unofficial project, independently developed and maintained by a community
 > member. Not affiliated with or endorsed by DeepSeek.
 
-[Project and source](https://github.com/yunfeizhu/dsh-pptx-viewer) ·
-[0.1.0 release](https://github.com/yunfeizhu/dsh-pptx-viewer/releases/tag/v0.1.0)
-· [Usage](https://github.com/yunfeizhu/dsh-pptx-viewer/blob/main/docs/usage.md)
+[Project and source](https://github.com/yunfeizhu/dsh-pptx-editor) ·
+[Releases](https://github.com/yunfeizhu/dsh-pptx-editor/releases) ·
+[Usage](https://github.com/yunfeizhu/dsh-pptx-editor/blob/main/docs/usage.md)
+
+> Draft: 1.0.0 is not published yet. Update installation instructions after
+> release before posting.
 
 ## What it does
 
@@ -20,11 +23,11 @@ it. For example:
 - “Change the second row's score to 42.”
 - “Insert the image I uploaded on this slide.”
 
-Version **0.1.0** supports slide creation and management, text and paragraph
+Version **1.0.0** supports slide creation and management, text and paragraph
 formatting, element alignment, shapes, tables, six chart types, uploaded images,
 and undo/redo. Changes appear directly without an extra apply-confirmation step.
 
-![Editor showing a new slide in a synthetic presentation](https://raw.githubusercontent.com/yunfeizhu/dsh-pptx-viewer/main/docs/assets/editor-example.png)
+![Editor showing a new slide in a synthetic presentation](https://raw.githubusercontent.com/yunfeizhu/dsh-pptx-editor/main/docs/assets/editor-example.png)
 
 _Editor example from a synthetic presentation used in browser regression._
 
@@ -33,14 +36,20 @@ _Editor example from a synthetic presentation used in browser regression._
 With Node 24 and a configured DeepSeek Harness:
 
 ```sh
-dsh plugin --profile web add dsh-pptx-viewer@0.1.0
+git clone https://github.com/yunfeizhu/dsh-pptx-editor.git
+cd dsh-pptx-editor
+corepack enable
+pnpm install --frozen-lockfile
+pnpm build
+pnpm check:package
+dsh plugin --profile web add ./.cache/packages/dsh-pptx-editor-1.0.0.tgz
 dsh web
 ```
 
 Save open documents before restarting an existing DSH service. Open DSH's login
-URL in Chrome or Edge. This is a prebuilt bundle; users do not need to build the
-plugin or configure a separate model key. Tested with DSH CLI `0.1.5-rc.1`,
-public DSH packages `0.1.5-rc.2`, and `pptx-react-viewer` `3.18.0`.
+URL in Chrome or Edge. No separate model key is required. Tested with DSH CLI
+`0.1.5-rc.1`, public DSH packages `0.1.5-rc.2`, and `pptx-react-viewer`
+`3.19.2`.
 
 ## DSH integration and current boundaries
 
@@ -58,8 +67,8 @@ model selected in the DSH conversation. No DSH source patch is required.
   sidebar or ask “Reopen the PPTX on the right.”
 - Animation, master/theme editing and other unavailable public APIs are not
   exposed to conversation. Imported charts and complex formatting have explicit
-  [capability limits](https://github.com/yunfeizhu/dsh-pptx-viewer/blob/main/docs/capabilities.md).
+  [capability limits](https://github.com/yunfeizhu/dsh-pptx-editor/blob/main/docs/capabilities.md).
 
 Bug reports and reproducible examples are welcome in the
-[issue tracker](https://github.com/yunfeizhu/dsh-pptx-viewer/issues). Please use
+[issue tracker](https://github.com/yunfeizhu/dsh-pptx-editor/issues). Please use
 a synthetic or anonymized presentation rather than private content.

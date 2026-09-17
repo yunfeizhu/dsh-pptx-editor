@@ -4,7 +4,7 @@ The README banner is an illustrative concept, not a screenshot of implemented
 plugin functionality. It is shared by both language editions and contains no
 text. Each README supplies a localized alternative description.
 
-Asset: [dsh-pptx-viewer-banner.png](dsh-pptx-viewer-banner.png).
+Asset: [dsh-pptx-editor-banner.png](dsh-pptx-editor-banner.png).
 
 Created with the built-in `image_gen` tool. Harapter's banner informed the pale
 blue glass illustration style; the generated scene belongs to this project's
@@ -13,7 +13,7 @@ conversation-to-presentation concept.
 ## Generation prompt
 
 ```text
-Create a brand-new 3:1 ultrawide GitHub README banner for dsh-pptx-viewer, an upcoming conversational PPTX editing plugin. No text, no letters, no logos, no watermark. Elegant high-key isometric 3D illustration on an almost-white icy blue background with very faint circular technical grid. Central subject: a large floating translucent glass presentation slide panel, showing a simple purple bar chart and a few blue rectangular content blocks, above a layered round ceramic-and-glass pedestal. To its left a smaller translucent chat-bubble cluster on its own low round pedestal; to its right a short stack of glass presentation slides on another pedestal. Thin gently flowing cyan and periwinkle luminous lines connect the chat bubbles through the main panel to the slide stack. Airy blue-white, pale indigo and glass materials, subtle reflections, refined architectural model rendering, soft ambient studio light, quiet premium open-source developer tooling aesthetic. Generous uncluttered whitespace, ultra crisp edges, balanced panoramic composition, no actual app screenshot and no claims of finished functionality. The composition should read as conversation flowing into presentation editing. Wide banner ideally 2400x800.
+Create a brand-new 3:1 ultrawide GitHub README banner for dsh-pptx-editor, an upcoming conversational PPTX editing plugin. No text, no letters, no logos, no watermark. Elegant high-key isometric 3D illustration on an almost-white icy blue background with very faint circular technical grid. Central subject: a large floating translucent glass presentation slide panel, showing a simple purple bar chart and a few blue rectangular content blocks, above a layered round ceramic-and-glass pedestal. To its left a smaller translucent chat-bubble cluster on its own low round pedestal; to its right a short stack of glass presentation slides on another pedestal. Thin gently flowing cyan and periwinkle luminous lines connect the chat bubbles through the main panel to the slide stack. Airy blue-white, pale indigo and glass materials, subtle reflections, refined architectural model rendering, soft ambient studio light, quiet premium open-source developer tooling aesthetic. Generous uncluttered whitespace, ultra crisp edges, balanced panoramic composition, no actual app screenshot and no claims of finished functionality. The composition should read as conversation flowing into presentation editing. Wide banner ideally 2400x800.
 ```
 
 ## Product screenshots

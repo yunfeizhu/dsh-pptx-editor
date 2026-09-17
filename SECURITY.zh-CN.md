@@ -10,7 +10,7 @@
 
 不要通过公开 Issue 或 PR 披露疑似漏洞。仓库提供私密报告入口时，请使用 **Security
 → Advisories → Report a vulnerability** 下的
-[私密漏洞报告表单](https://github.com/yunfeizhu/dsh-pptx-viewer/security/advisories/new)。
+[私密漏洞报告表单](https://github.com/yunfeizhu/dsh-pptx-editor/security/advisories/new)。
 
 如果私密报告不可用，可提交仅请求安全问题私密联系方式的 Issue，不描述漏洞。获得私密沟通渠道后，再发送技术细节。
 

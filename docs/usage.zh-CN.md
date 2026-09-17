@@ -1,33 +1,36 @@
-# 使用 dsh-pptx-viewer
+# 使用 dsh-pptx-editor
 
 [English](usage.md) · [简体中文](usage.zh-CN.md)
 
-## 安装 0.2.0
+## 安装 1.0.0
 
-先安装 Node 24 并配置 DeepSeek Harness，然后把插件安装到 Web 配置中：
+**当前尚未发布 GitHub Release 或 npm 包。** 先安装 Node 24 并配置 DeepSeek
+Harness，再从源码构建安装包：
 
 ```sh
-dsh plugin --profile web add dsh-pptx-viewer@0.2.0
+git clone https://github.com/yunfeizhu/dsh-pptx-editor.git
+cd dsh-pptx-editor
+corepack enable
+pnpm install --frozen-lockfile
+pnpm build
+pnpm check:package
+dsh plugin --profile web add ./.cache/packages/dsh-pptx-editor-1.0.0.tgz
 dsh web
 ```
 
-如果 DSH
-Web 已在运行，先保存打开的文稿，再重启服务。安装包已包含宿主插件、浏览器客户端和编辑器资源，不需要克隆源码或在安装时构建。使用安装包时不要再加载源码的
-`dsh.patch.yml`，否则会重复注册插件。
+安装包包含宿主插件、浏览器客户端和编辑器资源。安装后不要再加载源码的
+`dsh.patch.yml`，否则会重复注册插件。后续发布的预构建安装包见
+[GitHub Releases](https://github.com/yunfeizhu/dsh-pptx-editor/releases)，下载后先用
+`SHA256SUMS.txt` 校验。
 
-准备中的 1.0.0 沿用相同插件功能并重建了仓库历史，尚未发布 GitHub
-Release 或 npm 包。正式发布后，可以从
-[GitHub Releases](https://github.com/yunfeizhu/dsh-pptx-viewer/releases)
-下载预先构建的安装包：
+### 从旧名称迁移
 
-```sh
-dsh plugin --profile web add ./dsh-pptx-viewer-1.0.0.tgz
-dsh web
-```
+先保存打开的文稿并停止 DSH Web。如果之前安装了旧包，运行
+`dsh plugin --profile web remove dsh-pptx-viewer`，再安装新包并重启 DSH
+Web。旧 npm 包仍保留原名称和版本，不会被这次改名覆盖。浏览器自动保存的恢复标识保持不变。
 
-安装前请用该版本的 `SHA256SUMS.txt` 校验下载文件。卸载时运行
-`dsh plugin --profile web remove dsh-pptx-viewer`，再重启 DSH
-Web。卸载插件不会删除浏览器恢复数据。
+卸载新包时运行 `dsh plugin --profile web remove dsh-pptx-editor`，再重启 DSH
+Web。卸载不会删除浏览器恢复数据。
 
 ## 从源码启动
 

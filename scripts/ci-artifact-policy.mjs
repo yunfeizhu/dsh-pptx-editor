@@ -39,9 +39,9 @@ export function validateCiArtifact(
 ) {
   validateReleaseIdentity(tag, expected.commit, pkg.version);
   if (
-    pkg.name !== 'dsh-pptx-viewer' ||
+    pkg.name !== 'dsh-pptx-editor' ||
     pkg.private ||
-    filename !== `dsh-pptx-viewer-${pkg.version}.tgz`
+    filename !== `dsh-pptx-editor-${pkg.version}.tgz`
   )
     throw new Error('Unexpected release package.');
   if (

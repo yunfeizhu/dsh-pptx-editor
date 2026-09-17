@@ -71,5 +71,5 @@ export function bundleLicenses(metafiles, root = process.cwd()) {
   if (missing.length)
     throw new Error(`Missing license text for bundled ${missing.join(', ')}.`);
   if (!records.length) throw new Error('No bundled dependency licenses found.');
-  return `Third-party software bundled in dsh-pptx-viewer\n\n${records.sort().join('\n\n\n')}\n`;
+  return `Third-party software bundled in dsh-pptx-editor\n\n${records.sort().join('\n\n\n')}\n`;
 }

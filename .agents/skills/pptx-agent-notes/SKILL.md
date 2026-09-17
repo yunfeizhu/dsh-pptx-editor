@@ -1,7 +1,7 @@
 ---
 name: pptx-agent-notes
 description:
-  Maintain durable dsh-pptx-viewer decision records for document ownership,
+  Maintain durable dsh-pptx-editor decision records for document ownership,
   public APIs, compatibility, security, testing, or process changes. Excludes
   routine task logs.
 ---

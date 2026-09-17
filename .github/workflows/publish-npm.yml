@@ -53,14 +53,14 @@ jobs:
         run: |
           mkdir release-package
           gh release download "$RELEASE_TAG" --dir release-package \
-            --pattern 'dsh-pptx-viewer-*.tgz' --pattern SHA256SUMS.txt --pattern COMMIT.txt
+            --pattern 'dsh-pptx-editor-*.tgz' --pattern SHA256SUMS.txt --pattern COMMIT.txt
           cd release-package
           test "$(cat COMMIT.txt)" = "$RELEASE_COMMIT"
           sha256sum --check SHA256SUMS.txt
           test "$(find . -name '*.tgz' | wc -l)" -eq 1
-          tar -xOf dsh-pptx-viewer-*.tgz package/package.json > package.json
-          node --input-type=module -e 'import fs from "node:fs"; const p=JSON.parse(fs.readFileSync("package.json")); if(p.name!=="dsh-pptx-viewer" || `v${p.version}`!==process.env.RELEASE_TAG || p.private) process.exit(1)'
+          tar -xOf dsh-pptx-editor-*.tgz package/package.json > package.json
+          node --input-type=module -e 'import fs from "node:fs"; const p=JSON.parse(fs.readFileSync("package.json")); if(p.name!=="dsh-pptx-editor" || `v${p.version}`!==process.env.RELEASE_TAG || p.private) process.exit(1)'
       - name: Publish the verified tarball using npm trusted publishing
         run:
-          npm publish ./release-package/dsh-pptx-viewer-*.tgz --access public
+          npm publish ./release-package/dsh-pptx-editor-*.tgz --access public
           --provenance --ignore-scripts

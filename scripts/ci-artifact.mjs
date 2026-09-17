@@ -55,7 +55,7 @@ if (mode === 'select') {
   );
   if (
     tarballs.length !== 1 ||
-    !/^dsh-pptx-viewer-\d+\.\d+\.\d+\.tgz$/.test(tarballs[0])
+    !/^dsh-pptx-editor-\d+\.\d+\.\d+\.tgz$/.test(tarballs[0])
   )
     throw new Error('Expected one stable plugin tarball.');
   const filename = tarballs[0];

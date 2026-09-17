@@ -1,4 +1,4 @@
-# Contributing to dsh-pptx-viewer
+# Contributing to dsh-pptx-editor
 
 [English](CONTRIBUTING.md) | [简体中文](CONTRIBUTING.zh-CN.md)
 

@@ -17,12 +17,12 @@ interface Entry {
 }
 // Client modules can reload while DSH tab records and their signals stay alive.
 // Keep the editor registry on the page so a replacement module adopts the same frames.
-const registryKey = Symbol.for('dsh-pptx-viewer.panel-registry.v1');
+const registryKey = Symbol.for('dsh-pptx-editor.panel-registry.v1');
 const frames =
   (Reflect.get(document, registryKey) as Map<string, Entry> | undefined) ??
   new Map<string, Entry>();
 Reflect.set(document, registryKey, frames);
-const closingKey = Symbol.for('dsh-pptx-viewer.closing-connections.v1');
+const closingKey = Symbol.for('dsh-pptx-editor.closing-connections.v1');
 const closing =
   (Reflect.get(document, closingKey) as
     Map<string, Promise<void>> | undefined) ?? new Map<string, Promise<void>>();

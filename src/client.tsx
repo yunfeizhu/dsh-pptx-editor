@@ -19,7 +19,7 @@ import {
 import type { AttachmentIntent } from './attachments.js';
 
 export const inject = ['slots', 'sidebarRightTabs', 'sidebarRight', 'sessions'];
-const ID = 'dsh-pptx-viewer';
+const ID = 'dsh-pptx-editor';
 
 export function PptxAttachmentLauncher({
   sessionId,

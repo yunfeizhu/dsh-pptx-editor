@@ -180,15 +180,6 @@ OIDC workflow directly instead. Consult the current
 [npm documentation](https://docs.npmjs.com/trusted-publishers/) when setting it
 up.
 
-If the owner authorizes an npm-only first publication without a GitHub Release,
-download the sealed package directly from the successful main-push CI artifact.
-Verify the same repository, workflow, run attempt, exact main commit, manifest
-and checksum fields before publishing those bytes. Do not create a tag or GitHub
-Release solely to route this exception through the normal workflow. Retain the
-CI artifact metadata and compare npm's published integrity with the verified
-tarball. Later automated publication still requires configuring the new
-package's trusted publisher.
-
 ## Workflow maintenance
 
 Pin Actions by full commit SHA, disable checkout credential persistence, use
@@ -213,7 +204,7 @@ The history rebuild prepared version 1.0.0 for a later release. At that stage,
 the owner authorized building and verifying in main-push CI, without creating a
 tag, GitHub Release or npm publication. Existing npm versions and their
 provenance were unchanged by the rebuild. The subsequent rename and separately
-authorized npm-only publication follow the first-publication procedure above.
-Before automated npm publication, recheck the trusted publisher against the new
+authorized 1.0.0 publication follow the release procedure above. Before
+automated npm publication, recheck the trusted publisher against the new
 repository identity and protected npm environment; matching repository names
 alone do not establish working OIDC publication.

@@ -5,16 +5,14 @@
 ### English
 
 - Rename the project and package to `dsh-pptx-editor`.
-- Re-establish the repository with focused module commits and GitHub account
-  attribution. Plugin runtime behavior is unchanged from 0.2.0.
-- Publish 1.0.0 on npm and GitHub Releases using the same verified main-CI
-  artifact.
+- Provide prebuilt installation packages on npm and GitHub Releases.
+- Install with `dsh plugin --profile web add dsh-pptx-editor@1.0.0`.
 
 ### 简体中文
 
 - 项目和插件包统一更名为 `dsh-pptx-editor`。
-- 按模块重新建立仓库提交记录，使用 GitHub 账号署名；插件运行功能与 0.2.0 相同。
-- 使用主分支 CI 已验证的同一份安装包，以新包名发布 npm 1.0.0 和 GitHub Release。
+- 在 npm 和 GitHub Releases 提供预构建安装包。
+- 使用 `dsh plugin --profile web add dsh-pptx-editor@1.0.0` 安装。
 
 ## 0.2.0
 

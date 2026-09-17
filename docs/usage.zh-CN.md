@@ -4,30 +4,23 @@
 
 ## 安装 1.0.0
 
-**当前尚未发布 GitHub Release 或 npm 包。** 先安装 Node 24 并配置 DeepSeek
-Harness，再从源码构建安装包：
+先安装 Node 24 并配置 DeepSeek Harness，再安装预构建的 npm 包：
 
 ```sh
-git clone https://github.com/yunfeizhu/dsh-pptx-editor.git
-cd dsh-pptx-editor
-corepack enable
-pnpm install --frozen-lockfile
-pnpm build
-pnpm check:package
-dsh plugin --profile web add ./.cache/packages/dsh-pptx-editor-1.0.0.tgz
+dsh plugin --profile web add dsh-pptx-editor@1.0.0
 dsh web
 ```
 
 安装包包含宿主插件、浏览器客户端和编辑器资源。安装后不要再加载源码的
-`dsh.patch.yml`，否则会重复注册插件。后续发布的预构建安装包见
-[GitHub Releases](https://github.com/yunfeizhu/dsh-pptx-editor/releases)，下载后先用
-`SHA256SUMS.txt` 校验。
+`dsh.patch.yml`，否则会重复注册插件。npm 安装无需本地构建。如需自行构建安装包，克隆仓库后依次运行
+`pnpm install --frozen-lockfile`、`pnpm build` 和 `pnpm check:package`，再用同一
+`dsh plugin` 命令安装生成的 `.cache/packages/dsh-pptx-editor-1.0.0.tgz`。
 
 ### 从旧名称迁移
 
 先保存打开的文稿并停止 DSH Web。如果之前安装了旧包，运行
 `dsh plugin --profile web remove dsh-pptx-viewer`，再安装新包并重启 DSH
-Web。旧 npm 包仍保留原名称和版本，不会被这次改名覆盖。浏览器自动保存的恢复标识保持不变。
+Web。新名称对应独立的 npm 包，更新旧包不会自动切换已有安装。浏览器自动保存的恢复标识保持不变。
 
 卸载新包时运行 `dsh plugin --profile web remove dsh-pptx-editor`，再重启 DSH
 Web。卸载不会删除浏览器恢复数据。
@@ -38,12 +31,15 @@ Web。卸载不会删除浏览器恢复数据。
 Harness。
 
 ```sh
+git clone https://github.com/yunfeizhu/dsh-pptx-editor.git
+cd dsh-pptx-editor
+corepack enable
 pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-宿主兼容基线为 DSH CLI `0.1.5-rc.1` 及公开插件包 `0.1.5-rc.2`。插件 `0.2.0` /
-`1.0.0` 打包了 `pptx-react-viewer`
+宿主兼容基线为 DSH CLI `0.1.5-rc.1` 及公开插件包 `0.1.5-rc.2`。插件 `1.0.0`
+打包了 `pptx-react-viewer`
 `3.19.2`。启动补丁注册本地构建产物；启动时不使用该补丁即可停用该构建。
 
 如需让开发环境与平时的 DSH 配置分开：

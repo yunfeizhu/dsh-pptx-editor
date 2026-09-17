@@ -12,6 +12,7 @@
 </p>
 
 <p align="center">
+  <a href="https://www.npmjs.com/package/dsh-pptx-editor"><img src="https://img.shields.io/npm/v/dsh-pptx-editor" alt="npm version"></a>
   <a href="https://github.com/yunfeizhu/dsh-pptx-editor/blob/main/.node-version"><img src="https://img.shields.io/badge/Node.js-24-5FA04E" alt="Node.js 24"></a>
   <a href="https://github.com/yunfeizhu/dsh-pptx-editor/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue" alt="Apache-2.0"></a>
 </p>
@@ -34,19 +35,11 @@ appears in the editor on the right._
 
 ## Quick start
 
-**1.0.0 is being prepared and is not yet published on GitHub Releases or npm.**
-
 You need **Node 24**, a configured **DeepSeek Harness**, and a current **Chrome
-or Edge** browser. Build from source and install into the Web profile:
+or Edge** browser. Install the prebuilt npm package into the Web profile:
 
 ```sh
-git clone https://github.com/yunfeizhu/dsh-pptx-editor.git
-cd dsh-pptx-editor
-corepack enable
-pnpm install --frozen-lockfile
-pnpm build
-pnpm check:package
-dsh plugin --profile web add ./.cache/packages/dsh-pptx-editor-1.0.0.tgz
+dsh plugin --profile web add dsh-pptx-editor@1.0.0
 dsh web
 ```
 
@@ -81,8 +74,8 @@ removal, see the
 
 The native editor remains available for direct manipulation. Conversation edits
 use the same document and editor history. A sequence of separate tool commands
-is **not** a single atomic undo step. Version 0.2.0 adds `edit_pptx_batch`:
-change up to 100 existing elements across slides with one undo step.
+is **not** a single atomic undo step. Use `edit_pptx_batch` to change up to 100
+existing elements across slides with one undo step.
 
 ![A presentation with an editable table and chart](https://raw.githubusercontent.com/yunfeizhu/dsh-pptx-editor/main/docs/assets/tables-and-charts.png)
 

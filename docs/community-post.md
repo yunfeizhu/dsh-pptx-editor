@@ -6,11 +6,10 @@
 > member. Not affiliated with or endorsed by DeepSeek.
 
 [Project and source](https://github.com/yunfeizhu/dsh-pptx-editor) ·
-[Releases](https://github.com/yunfeizhu/dsh-pptx-editor/releases) ·
+[npm package](https://www.npmjs.com/package/dsh-pptx-editor) ·
 [Usage](https://github.com/yunfeizhu/dsh-pptx-editor/blob/main/docs/usage.md)
 
-> Draft: 1.0.0 is not published yet. Update installation instructions after
-> release before posting.
+> Draft: verify the npm package and installation instructions before posting.
 
 ## What it does
 
@@ -36,13 +35,7 @@ _Editor example from a synthetic presentation used in browser regression._
 With Node 24 and a configured DeepSeek Harness:
 
 ```sh
-git clone https://github.com/yunfeizhu/dsh-pptx-editor.git
-cd dsh-pptx-editor
-corepack enable
-pnpm install --frozen-lockfile
-pnpm build
-pnpm check:package
-dsh plugin --profile web add ./.cache/packages/dsh-pptx-editor-1.0.0.tgz
+dsh plugin --profile web add dsh-pptx-editor@1.0.0
 dsh web
 ```
 

@@ -12,6 +12,7 @@
 </p>
 
 <p align="center">
+  <a href="https://www.npmjs.com/package/dsh-pptx-editor"><img src="https://img.shields.io/npm/v/dsh-pptx-editor" alt="npm version"></a>
   <a href="https://github.com/yunfeizhu/dsh-pptx-editor/blob/main/.node-version"><img src="https://img.shields.io/badge/Node.js-24-5FA04E" alt="Node.js 24"></a>
   <a href="https://github.com/yunfeizhu/dsh-pptx-editor/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue" alt="Apache-2.0"></a>
 </p>
@@ -30,19 +31,11 @@ _使用合成演示文稿截取的真实 DSH 对话，标题修改直接显示�
 
 ## 快速开始
 
-**1.0.0 正在准备中，尚未发布 GitHub Release 或 npm 包。**
-
 需要 **Node 24**、已配置好的 **DeepSeek Harness**，以及较新版本的
-**Chrome 或 Edge**。当前可从源码构建并安装到 Web 配置中：
+**Chrome 或 Edge**。将预构建的 npm 包安装到 Web 配置中：
 
 ```sh
-git clone https://github.com/yunfeizhu/dsh-pptx-editor.git
-cd dsh-pptx-editor
-corepack enable
-pnpm install --frozen-lockfile
-pnpm build
-pnpm check:package
-dsh plugin --profile web add ./.cache/packages/dsh-pptx-editor-1.0.0.tgz
+dsh plugin --profile web add dsh-pptx-editor@1.0.0
 dsh web
 ```
 
@@ -72,7 +65,7 @@ Web 已经运行，请先保存打开的文稿，再重启服务以加载插件�
 | 图片   | 插入上传的图片，裁剪或调整透明度、亮度和对比度                         |
 | 历史   | 撤销、重做，或通过对话重新打开演示文稿                                 |
 
-你仍然可以直接操作原生编辑器。对话修改与手动操作使用同一份文稿和编辑历史；连续多条工具命令**不会合并成一次原子撤销**。0.2.0 新增
+你仍然可以直接操作原生编辑器。对话修改与手动操作使用同一份文稿和编辑历史；连续多条工具命令**不会合并成一次原子撤销**。使用
 `edit_pptx_batch`：一次修改最多 100 个跨页现有元素，只占一步撤销。
 
 ![包含可编辑表格和图表的演示文稿](https://raw.githubusercontent.com/yunfeizhu/dsh-pptx-editor/main/docs/assets/tables-and-charts.png)

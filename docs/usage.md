@@ -4,33 +4,28 @@
 
 ## Install 1.0.0
 
-**This version is not yet published on GitHub Releases or npm.** Install Node 24
-and configure DeepSeek Harness, then build the package from source:
+Install Node 24 and configure DeepSeek Harness, then install the prebuilt npm
+package:
 
 ```sh
-git clone https://github.com/yunfeizhu/dsh-pptx-editor.git
-cd dsh-pptx-editor
-corepack enable
-pnpm install --frozen-lockfile
-pnpm build
-pnpm check:package
-dsh plugin --profile web add ./.cache/packages/dsh-pptx-editor-1.0.0.tgz
+dsh plugin --profile web add dsh-pptx-editor@1.0.0
 dsh web
 ```
 
 The package includes the host plugin, browser client and editor assets. Do not
-also load the source `dsh.patch.yml`, which would register the plugin twice.
-Future prebuilt packages will be available from
-[GitHub Releases](https://github.com/yunfeizhu/dsh-pptx-editor/releases); verify
-downloads against `SHA256SUMS.txt` before installation.
+also load the source `dsh.patch.yml`, which would register the plugin twice. The
+npm package needs no local build. To build a local installation tarball, clone
+the repository and run `pnpm install --frozen-lockfile`, `pnpm build` and
+`pnpm check:package`; install the resulting
+`.cache/packages/dsh-pptx-editor-1.0.0.tgz` with the same `dsh plugin` command.
 
 ### Migrate from the previous name
 
 Save open documents and stop DSH Web first. If you installed the old package,
 run `dsh plugin --profile web remove dsh-pptx-viewer`, then install the new
-package and restart DSH Web. Existing npm packages keep their original name and
-version; this rename does not replace them. Browser AutoSave recovery
-identifiers remain unchanged.
+package and restart DSH Web. The new name is a separate npm package; updating
+the old package does not switch an existing installation. Browser AutoSave
+recovery identifiers remain unchanged.
 
 To remove the new package, run
 `dsh plugin --profile web remove dsh-pptx-editor`, then restart DSH Web. Removal
@@ -42,6 +37,9 @@ For development, use Node 24, the pnpm version in `package.json`, and a
 configured local DeepSeek Harness:
 
 ```sh
+git clone https://github.com/yunfeizhu/dsh-pptx-editor.git
+cd dsh-pptx-editor
+corepack enable
 pnpm install --frozen-lockfile
 pnpm dev
 ```

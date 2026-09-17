@@ -200,10 +200,11 @@ GitHub account and GitHub no-reply commit email. Old PR, Issue, commit and tag
 identifiers are not part of the new repository. Retain previous release notes as
 historical package information without linking them to unrelated new IDs.
 
-Version 1.0.0 is prepared for a later release. Build and verify once in
-main-push CI, then wait for explicit release authorization after the next
-content changes. No tag, GitHub release or npm publication is created by this
-history rebuild. The existing npm versions and their provenance remain
-unchanged. Before a later npm release, recheck the trusted publisher against the
-new repository identity and protected npm environment; matching repository names
+The history rebuild prepared version 1.0.0 for a later release. At that stage,
+the owner authorized building and verifying in main-push CI, without creating a
+tag, GitHub Release or npm publication. Existing npm versions and their
+provenance were unchanged by the rebuild. The subsequent rename and separately
+authorized 1.0.0 publication follow the release procedure above. Before
+automated npm publication, recheck the trusted publisher against the new
+repository identity and protected npm environment; matching repository names
 alone do not establish working OIDC publication.

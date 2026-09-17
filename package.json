@@ -1,0 +1,164 @@
+{
+  "name": "dsh-pptx-viewer",
+  "version": "1.0.0",
+  "description": "PPTX editor for DeepSeek Harness",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yunfeizhu/dsh-pptx-viewer.git"
+  },
+  "homepage": "https://github.com/yunfeizhu/dsh-pptx-viewer#readme",
+  "bugs": "https://github.com/yunfeizhu/dsh-pptx-viewer/issues",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "pptx",
+    "powerpoint"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:coverage && pnpm build && pnpm check:package && pnpm lint:markdown && pnpm check:repository",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "build": "node scripts/build.mjs",
+    "prepack": "pnpm build",
+    "check:package": "node scripts/check-package.mjs",
+    "lint:markdown": "markdownlint-cli2",
+    "check:repository": "node scripts/check-repository.mjs",
+    "check:pr-metadata": "node scripts/check-pr-metadata.mjs",
+    "test:browser": "pnpm build && playwright test",
+    "dev": "pnpm build && dsh web --patch ./dsh.patch.yml"
+  },
+  "devDependencies": {
+    "@ai-sdk/react": "4.0.102",
+    "@deepseek-ai/cordis": "4.0.2",
+    "@deepseek-ai/dsh-agent": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-api-session-controller": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-attachment": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-client-connection": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-client-store": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-client-ui-conversation": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-client-ui-dockkit": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-client-ui-renderer": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-client-ui-session": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-client-ui-sidebar-right": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-client-ui-slots": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-code-runtime": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-host-webserver": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-invariants": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-llm": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-scope": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-session": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-session-projection": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-session-query": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-system-prompt": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-tools": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-user-approval": "0.1.5-rc.2",
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.63.0",
+    "@testing-library/dom": "10.4.2",
+    "@testing-library/react": "16.3.3",
+    "@types/node": "24.13.4",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/wicg-file-system-access": "2023.10.7",
+    "@vitest/coverage-v8": "4.1.11",
+    "@vitest/eslint-plugin": "1.6.27",
+    "ai": "7.0.99",
+    "esbuild": "0.28.2",
+    "eslint": "10.10.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-node-import": "1.2.0",
+    "fast-xml-parser": "5.10.1",
+    "framer-motion": "13.2.0",
+    "globals": "17.12.0",
+    "i18next": "26.3.6",
+    "js-yaml": "5.4.1",
+    "jsdom": "27.4.0",
+    "jspdf": "4.2.1",
+    "jszip": "3.10.1",
+    "lucide-react": "1.24.0",
+    "markdownlint-cli2": "0.23.2",
+    "pptx-react-viewer": "3.19.2",
+    "pptxgenjs": "4.0.1",
+    "prettier": "3.9.6",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-i18next": "17.0.9",
+    "react-icons": "5.7.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.70.0",
+    "vitest": "4.1.11"
+  },
+  "dependencies": {
+    "zod": "4.5.2"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "default": "./dist/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "cordis.patch.yml",
+    "LICENSE",
+    "README.md",
+    "README.zh-CN.md",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-sidebar-right",
+        "@deepseek-ai/dsh-client-ui-session",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-ui-renderer"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "4.0.2",
+    "@deepseek-ai/dsh-client-connection": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-host-webserver": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-tools": "0.1.5-rc.2"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-connection": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-host-webserver": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    }
+  }
+}

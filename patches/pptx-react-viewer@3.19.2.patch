@@ -1,0 +1,338 @@
+diff --git a/dist/chunk-ATKAU2J4.mjs b/dist/chunk-ATKAU2J4.mjs
+--- a/dist/chunk-ATKAU2J4.mjs
++++ b/dist/chunk-ATKAU2J4.mjs
+@@ -34104,6 +34104,8 @@
+ }
+ function AutosaveRecoveryDialog({
+   prompt,
++  fileName,
++  discarding,
+   onRestore,
+   onDiscard
+ }) {
+@@ -34124,22 +34126,25 @@
+         {
+           role: "dialog",
+           "aria-modal": "true",
++          "aria-busy": discarding,
+           "aria-label": title,
+           className: "bg-background border border-border rounded-lg shadow-xl w-[440px] max-w-[90vw] p-6",
++          style: { maxHeight: "90vh", overflowY: "auto", overflowWrap: "anywhere" },
+           children: [
+             /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-3 mb-3", children: [
+-              /* @__PURE__ */ jsx("div", { className: "flex items-center justify-center w-10 h-10 rounded-full bg-primary/10", children: /* @__PURE__ */ jsx(LuHistory, { className: "w-5 h-5 text-primary" }) }),
++              /* @__PURE__ */ jsx("div", { className: "flex items-center justify-center w-10 h-10 rounded-full bg-primary/10", style: { flexShrink: 0 }, children: /* @__PURE__ */ jsx(LuHistory, { className: "w-5 h-5 text-primary" }) }),
+               /* @__PURE__ */ jsx("h2", { className: "text-base font-semibold text-foreground", children: title })
+             ] }),
+-            /* @__PURE__ */ jsx("p", { className: "text-sm text-muted-foreground", children: t(prompt.messageKey, prompt.messageParams) }),
++            /* @__PURE__ */ jsx("p", { className: "text-sm text-muted-foreground", children: t(prompt.messageKey, { ...prompt.messageParams, file: fileName || prompt.filePath.split(/[\\/]/).pop() }) }),
+             /* @__PURE__ */ jsx("p", { className: "text-xs text-muted-foreground mt-2", children: t("pptx.autosave.recovery.savedLabel", { when }) }),
+-            /* @__PURE__ */ jsxs("div", { className: "flex justify-end gap-2 mt-6", children: [
++            /* @__PURE__ */ jsxs("div", { className: "flex justify-end gap-2 mt-6", style: { flexWrap: "wrap" }, children: [
+               /* @__PURE__ */ jsxs(
+                 "button",
+                 {
+                   type: "button",
+                   className: "inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-md border border-border bg-background text-foreground hover:bg-accent transition-colors",
+                   onClick: onDiscard,
++                  disabled: discarding,
+                   children: [
+                     /* @__PURE__ */ jsx(LuTrash2, { className: "w-4 h-4" }),
+                     t(prompt.discardKey)
+@@ -34152,6 +34157,7 @@
+                   type: "button",
+                   className: "inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-md bg-primary text-white hover:bg-primary/90 transition-colors",
+                   onClick: onRestore,
++                  disabled: discarding,
+                   children: [
+                     /* @__PURE__ */ jsx(LuHistory, { className: "w-4 h-4" }),
+                     t(prompt.restoreKey)
+@@ -36981,12 +36987,14 @@
+           /* @__PURE__ */ jsx(
+             AutosaveRecoveryDialog,
+             {
++              fileName,
+               prompt: shouldShowAutosaveRecoveryPrompt({
+                 prompt: recovery.prompt,
+                 presenting: mode === "present"
+               }) ? recovery.prompt : null,
+               onRestore: recovery.restore,
+-              onDiscard: recovery.discard
++              onDiscard: recovery.discard,
++              discarding: recovery.discarding
+             }
+           ),
+           /* @__PURE__ */ jsx(
+diff --git a/dist/chunk-M5BAPEQL.mjs b/dist/chunk-M5BAPEQL.mjs
+--- a/dist/chunk-M5BAPEQL.mjs
++++ b/dist/chunk-M5BAPEQL.mjs
+@@ -476,12 +476,27 @@
+ }
+ 
+ // src/viewer/hooks/explicit-slide-history.ts
++function historyElementContent(element) {
++  return {
++    ...element,
++    // Serialization refreshes archive caches and assigns shape IDs without an editor action.
++    rawXml: void 0,
++    shapeId: void 0,
++    ...element.type === "group" ? { children: element.children.map(historyElementContent) } : {}
++  };
++}
+ function serializeHistoryDocument(snapshot) {
+   return JSON.stringify({
+     width: snapshot.width,
+     height: snapshot.height,
+-    slides: snapshot.slides,
+-    templateElementsBySlideId: snapshot.templateElementsBySlideId
++    slides: snapshot.slides.map((slide) => ({
++      ...slide,
++      rawXml: void 0,
++      elements: slide.elements.map(historyElementContent)
++    })),
++    templateElementsBySlideId: Object.fromEntries(
++      Object.entries(snapshot.templateElementsBySlideId).map(([id, elements]) => [id, elements.map(historyElementContent)])
++    )
+   });
+ }
+ function recordExplicitSlideUpdate(past, future, previous, before, label, maxDepth) {
+@@ -9306,6 +9321,8 @@
+   const recoveryCheckedRef = useRef(false);
+   const recordRef = useRef(null);
+   const [prompt, setPrompt] = useState(null);
++  const discardingRef = useRef(false);
++  const [discarding, setDiscarding] = useState(false);
+   const onRestore = input.onRestore;
+   const openVersionHistory = input.openVersionHistory;
+   useEffect(() => {
+@@ -9331,6 +9348,7 @@
+     })();
+   }, [filePath, loading, error, slideCount, autosaveAllowed, openVersionHistory]);
+   const restore = useCallback(() => {
++    if (discardingRef.current) return;
+     const record = recordRef.current;
+     setPrompt(null);
+     if (record && onRestore) {
+@@ -9340,13 +9358,21 @@
+   }, [onRestore]);
+   const discard = useCallback(() => {
+     const record = recordRef.current;
+-    setPrompt(null);
+-    recordRef.current = null;
+-    if (record) {
+-      void discardAutosaveRecovery(record);
+-    }
++    if (!record || discardingRef.current) return;
++    discardingRef.current = true;
++    setDiscarding(true);
++    // Keep the recovery decision visible until its storage operation completes.
++    void discardAutosaveRecovery(record).then(() => {
++      if (recordRef.current === record) {
++        recordRef.current = null;
++        setPrompt(null);
++      }
++    }).finally(() => {
++      discardingRef.current = false;
++      setDiscarding(false);
++    });
+   }, []);
+-  return { prompt, restore, discard };
++  return { prompt, restore, discard, discarding };
+ }
+ function usePresentationSetup(input) {
+   const {
+diff --git a/dist/chunk-RPPLJQ6R.js b/dist/chunk-RPPLJQ6R.js
+--- a/dist/chunk-RPPLJQ6R.js
++++ b/dist/chunk-RPPLJQ6R.js
+@@ -34110,6 +34110,8 @@
+ }
+ function AutosaveRecoveryDialog({
+   prompt,
++  fileName,
++  discarding,
+   onRestore,
+   onDiscard
+ }) {
+@@ -34130,22 +34132,25 @@
+         {
+           role: "dialog",
+           "aria-modal": "true",
++          "aria-busy": discarding,
+           "aria-label": title,
+           className: "bg-background border border-border rounded-lg shadow-xl w-[440px] max-w-[90vw] p-6",
++          style: { maxHeight: "90vh", overflowY: "auto", overflowWrap: "anywhere" },
+           children: [
+             /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex items-center gap-3 mb-3", children: [
+-              /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex items-center justify-center w-10 h-10 rounded-full bg-primary/10", children: /* @__PURE__ */ jsxRuntime.jsx(lu.LuHistory, { className: "w-5 h-5 text-primary" }) }),
++              /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex items-center justify-center w-10 h-10 rounded-full bg-primary/10", style: { flexShrink: 0 }, children: /* @__PURE__ */ jsxRuntime.jsx(lu.LuHistory, { className: "w-5 h-5 text-primary" }) }),
+               /* @__PURE__ */ jsxRuntime.jsx("h2", { className: "text-base font-semibold text-foreground", children: title })
+             ] }),
+-            /* @__PURE__ */ jsxRuntime.jsx("p", { className: "text-sm text-muted-foreground", children: t(prompt.messageKey, prompt.messageParams) }),
++            /* @__PURE__ */ jsxRuntime.jsx("p", { className: "text-sm text-muted-foreground", children: t(prompt.messageKey, { ...prompt.messageParams, file: fileName || prompt.filePath.split(/[\\/]/).pop() }) }),
+             /* @__PURE__ */ jsxRuntime.jsx("p", { className: "text-xs text-muted-foreground mt-2", children: t("pptx.autosave.recovery.savedLabel", { when }) }),
+-            /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex justify-end gap-2 mt-6", children: [
++            /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex justify-end gap-2 mt-6", style: { flexWrap: "wrap" }, children: [
+               /* @__PURE__ */ jsxRuntime.jsxs(
+                 "button",
+                 {
+                   type: "button",
+                   className: "inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-md border border-border bg-background text-foreground hover:bg-accent transition-colors",
+                   onClick: onDiscard,
++                  disabled: discarding,
+                   children: [
+                     /* @__PURE__ */ jsxRuntime.jsx(lu.LuTrash2, { className: "w-4 h-4" }),
+                     t(prompt.discardKey)
+@@ -34158,6 +34163,7 @@
+                   type: "button",
+                   className: "inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-md bg-primary text-white hover:bg-primary/90 transition-colors",
+                   onClick: onRestore,
++                  disabled: discarding,
+                   children: [
+                     /* @__PURE__ */ jsxRuntime.jsx(lu.LuHistory, { className: "w-4 h-4" }),
+                     t(prompt.restoreKey)
+@@ -36987,12 +36993,14 @@
+           /* @__PURE__ */ jsxRuntime.jsx(
+             AutosaveRecoveryDialog,
+             {
++              fileName,
+               prompt: chunkZUIM5737_js.shouldShowAutosaveRecoveryPrompt({
+                 prompt: recovery.prompt,
+                 presenting: mode === "present"
+               }) ? recovery.prompt : null,
+               onRestore: recovery.restore,
+-              onDiscard: recovery.discard
++              onDiscard: recovery.discard,
++              discarding: recovery.discarding
+             }
+           ),
+           /* @__PURE__ */ jsxRuntime.jsx(
+diff --git a/dist/chunk-GULL4H2I.mjs b/dist/chunk-GULL4H2I.mjs
+--- a/dist/chunk-GULL4H2I.mjs
++++ b/dist/chunk-GULL4H2I.mjs
+@@ -194445,8 +194445,8 @@
+     const record2 = await getAutosaveSnapshot(filePath);
+     const prompt = autosaveRecoveryPrompt({
+       record: record2 ? { key: record2.key, timestamp: record2.timestamp, size: record2.size } : void 0,
+-      now,
+-      consumedTimestamp: consumedAutosaveSnapshotTimestamp()
++      // Recovery is not a source-file save; keep offering the snapshot on reload.
++      now
+     });
+     if (!prompt || !record2) {
+       return null;
+@@ -194457,11 +194457,9 @@
+   }
+ }
+ function acceptAutosaveRecovery(record2) {
+-  markAutosaveSnapshotConsumed(record2.timestamp);
+   return record2.data instanceof Uint8Array ? record2.data : new Uint8Array(record2.data);
+ }
+ async function discardAutosaveRecovery(record2) {
+-  markAutosaveSnapshotConsumed(record2.timestamp);
+   try {
+     await deleteAutosaveSnapshot(record2.key);
+   } catch {
+diff --git a/dist/chunk-ZUIM5737.js b/dist/chunk-ZUIM5737.js
+--- a/dist/chunk-ZUIM5737.js
++++ b/dist/chunk-ZUIM5737.js
+@@ -194452,8 +194452,8 @@
+     const record2 = await getAutosaveSnapshot(filePath);
+     const prompt = autosaveRecoveryPrompt({
+       record: record2 ? { key: record2.key, timestamp: record2.timestamp, size: record2.size } : void 0,
+-      now,
+-      consumedTimestamp: consumedAutosaveSnapshotTimestamp()
++      // Recovery is not a source-file save; keep offering the snapshot on reload.
++      now
+     });
+     if (!prompt || !record2) {
+       return null;
+@@ -194464,11 +194464,9 @@
+   }
+ }
+ function acceptAutosaveRecovery(record2) {
+-  markAutosaveSnapshotConsumed(record2.timestamp);
+   return record2.data instanceof Uint8Array ? record2.data : new Uint8Array(record2.data);
+ }
+ async function discardAutosaveRecovery(record2) {
+-  markAutosaveSnapshotConsumed(record2.timestamp);
+   try {
+     await deleteAutosaveSnapshot(record2.key);
+   } catch {
+diff --git a/dist/chunk-2LK3OHAN.js b/dist/chunk-2LK3OHAN.js
+--- a/dist/chunk-2LK3OHAN.js
++++ b/dist/chunk-2LK3OHAN.js
+@@ -482,12 +482,27 @@
+ }
+ 
+ // src/viewer/hooks/explicit-slide-history.ts
++function historyElementContent(element) {
++  return {
++    ...element,
++    // Serialization refreshes archive caches and assigns shape IDs without an editor action.
++    rawXml: void 0,
++    shapeId: void 0,
++    ...element.type === "group" ? { children: element.children.map(historyElementContent) } : {}
++  };
++}
+ function serializeHistoryDocument(snapshot) {
+   return JSON.stringify({
+     width: snapshot.width,
+     height: snapshot.height,
+-    slides: snapshot.slides,
+-    templateElementsBySlideId: snapshot.templateElementsBySlideId
++    slides: snapshot.slides.map((slide) => ({
++      ...slide,
++      rawXml: void 0,
++      elements: slide.elements.map(historyElementContent)
++    })),
++    templateElementsBySlideId: Object.fromEntries(
++      Object.entries(snapshot.templateElementsBySlideId).map(([id, elements]) => [id, elements.map(historyElementContent)])
++    )
+   });
+ }
+ function recordExplicitSlideUpdate(past, future, previous, before, label, maxDepth) {
+@@ -9312,6 +9327,8 @@
+   const recoveryCheckedRef = React18.useRef(false);
+   const recordRef = React18.useRef(null);
+   const [prompt, setPrompt] = React18.useState(null);
++  const discardingRef = React18.useRef(false);
++  const [discarding, setDiscarding] = React18.useState(false);
+   const onRestore = input.onRestore;
+   const openVersionHistory = input.openVersionHistory;
+   React18.useEffect(() => {
+@@ -9337,6 +9354,7 @@
+     })();
+   }, [filePath, loading, error, slideCount, autosaveAllowed, openVersionHistory]);
+   const restore = React18.useCallback(() => {
++    if (discardingRef.current) return;
+     const record = recordRef.current;
+     setPrompt(null);
+     if (record && onRestore) {
+@@ -9346,13 +9364,21 @@
+   }, [onRestore]);
+   const discard = React18.useCallback(() => {
+     const record = recordRef.current;
+-    setPrompt(null);
+-    recordRef.current = null;
+-    if (record) {
+-      void chunkZUIM5737_js.discardAutosaveRecovery(record);
+-    }
++    if (!record || discardingRef.current) return;
++    discardingRef.current = true;
++    setDiscarding(true);
++    // Keep the recovery decision visible until its storage operation completes.
++    void chunkZUIM5737_js.discardAutosaveRecovery(record).then(() => {
++      if (recordRef.current === record) {
++        recordRef.current = null;
++        setPrompt(null);
++      }
++    }).finally(() => {
++      discardingRef.current = false;
++      setDiscarding(false);
++    });
+   }, []);
+-  return { prompt, restore, discard };
++  return { prompt, restore, discard, discarding };
+ }
+ function usePresentationSetup(input) {
+   const {

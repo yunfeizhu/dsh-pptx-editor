@@ -1,0 +1,17 @@
+allowBuilds:
+  core-js: false
+  esbuild: true
+
+autoInstallPeers: false
+
+minimumReleaseAgeExclude:
+  - pptx-react-viewer@3.19.2
+
+overrides:
+  # GHSA-7w5x-hrqm-74c2; remove after markdownlint-cli2 selects a patched version.
+  'markdownlint-cli2@0.23.2>smol-toml': 1.7.1
+  # GHSA-5p2g-fcmc-qvqq and GHSA-w3rx-r6r6-pgpr; test fixture generator only.
+  'pptxgenjs@4.0.1>image-size': 2.0.4
+
+patchedDependencies:
+  pptx-react-viewer@3.19.2: patches/pptx-react-viewer@3.19.2.patch

@@ -108,13 +108,14 @@ exact approved main-push package, with the existing source and checksum checks.
 
 ## Publishing a release
 
-The package name is `dsh-pptx-viewer`; the first version is `0.1.0`, licensed
-under [Apache License 2.0](../LICENSE). The standard `dsh.bundle` patch loads
-the installed package by name. `pnpm check:package` examines the actual tarball
-and rejects missing exports, missing editor assets, unintended files, source
-paths and install-time scripts. The editor and its compatibility patch are
-compiled into the browser assets. Only Zod is a runtime npm dependency; optional
-DSH peers document compatibility without installing a second harness.
+The package name is `dsh-pptx-editor`; the first version under this name is
+`1.0.0`, licensed under [Apache License 2.0](../LICENSE). The standard
+`dsh.bundle` patch loads the installed package by name. `pnpm check:package`
+examines the actual tarball and rejects missing exports, missing editor assets,
+unintended files, source paths and install-time scripts. The editor and its
+compatibility patch are compiled into the browser assets. Only Zod is a runtime
+npm dependency; optional DSH peers document compatibility without installing a
+second harness.
 
 Before remote publication, configure these external controls and verify them:
 
@@ -125,7 +126,7 @@ Before remote publication, configure these external controls and verify them:
    from the release tag itself, so provenance identifies the package's exact
    source commit. Both workflows verify the tag and approved commit.
 3. On the npm package, configure a GitHub trusted publisher for owner
-   `yunfeizhu`, repository `dsh-pptx-viewer`, workflow `publish-npm.yml`,
+   `yunfeizhu`, repository `dsh-pptx-editor`, workflow `publish-npm.yml`,
    environment `npm`, with permission to run `npm publish`. Never store a
    long-lived npm token in GitHub. The Node 24 toolchain supplies a recent
    OIDC-capable npm CLI.
@@ -134,9 +135,9 @@ Release order:
 
 1. Merge reviewed, passing changes. For subsequent versions, use Release Please
    to prepare the version/changelog PR first. Version and release manifest must
-   agree. The initial `0.1.0` baseline is prepared in this repository change.
+   agree. The initial `1.0.0` baseline is prepared in this repository change.
 2. Under release authorization, create an annotated stable tag, such as
-   `v0.1.0`, at the approved `main` commit and push it. Record the full
+   `v1.0.0`, at the approved `main` commit and push it. Record the full
    40-character commit.
 3. Dispatch **Prepare release artifacts** on `main` with that tag and commit.
    The exact commit must have successful main-push CI from the new artifact
@@ -150,7 +151,7 @@ Release order:
 4. Dispatch **Publish npm package** from that **tag** with the same target, then
    verify the official registry version, tarball integrity, `latest` tag and
    provenance. Test a clean
-   `dsh plugin --profile web add dsh-pptx-viewer@<version>` installation.
+   `dsh plugin --profile web add dsh-pptx-editor@<version>` installation.
 5. Make the matching GitHub release public, then publish the community post with
    the verified installation command. A draft post is not a community listing.
 
@@ -160,7 +161,7 @@ A new package has no npm settings in which to register its trusted publisher.
 The first release may therefore need a maintainer's interactive npm login and
 2FA. Download the **checked tarball from the draft GitHub release**, verify its
 `SHA256SUMS.txt` and `COMMIT.txt`, and publish that exact `.tgz` using
-`npm publish ./dsh-pptx-viewer-0.1.0.tgz --access public --ignore-scripts`. Do
+`npm publish ./dsh-pptx-editor-1.0.0.tgz --access public --ignore-scripts`. Do
 not build or publish from a mutable local checkout, create a placeholder
 version, or add a token to CI. Then configure OIDC for later releases. A manual
 first publication does not have GitHub Actions provenance; report this

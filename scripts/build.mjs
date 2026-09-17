@@ -39,7 +39,7 @@ const client = await build({
 });
 await writeFile(
   'dist/client.js',
-  `window.__ModuleLoader__.load({id: 'dsh-pptx-viewer', factory(require) { const module = {exports: {}}; const exports = module.exports;\n${client.outputFiles[0].text}\nreturn module.exports; }});\n`,
+  `window.__ModuleLoader__.load({id: 'dsh-pptx-editor', factory(require) { const module = {exports: {}}; const exports = module.exports;\n${client.outputFiles[0].text}\nreturn module.exports; }});\n`,
 );
 const editor = await build({
   entryPoints: ['src/editor/main.tsx'],

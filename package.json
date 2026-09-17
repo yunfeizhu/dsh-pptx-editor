@@ -1,14 +1,14 @@
 {
-  "name": "dsh-pptx-viewer",
+  "name": "dsh-pptx-editor",
   "version": "1.0.0",
   "description": "PPTX editor for DeepSeek Harness",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yunfeizhu/dsh-pptx-viewer.git"
+    "url": "git+https://github.com/yunfeizhu/dsh-pptx-editor.git"
   },
-  "homepage": "https://github.com/yunfeizhu/dsh-pptx-viewer#readme",
-  "bugs": "https://github.com/yunfeizhu/dsh-pptx-viewer/issues",
+  "homepage": "https://github.com/yunfeizhu/dsh-pptx-editor#readme",
+  "bugs": "https://github.com/yunfeizhu/dsh-pptx-editor/issues",
   "keywords": [
     "dsh-plugin",
     "deepseek-harness",

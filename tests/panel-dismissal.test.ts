@@ -39,6 +39,26 @@ it('does not record unload as closing and accepts closes again after pageshow', 
   expect(isPanelDismissed(freshPage(), 'unload')).toBe(true);
 });
 
+it('migrates the old package closed preference without reopening the panel', () => {
+  sessionStorage.setItem('dsh-pptx-viewer.panel-dismissed.v1:a', '1');
+  expect(isPanelDismissed(freshPage(), 'a')).toBe(true);
+  expect(sessionStorage.getItem('dsh-pptx-editor.panel-dismissed.v1:a')).toBe(
+    '1',
+  );
+  expect(
+    sessionStorage.getItem('dsh-pptx-viewer.panel-dismissed.v1:a'),
+  ).toBeNull();
+  expect(isPanelDismissed(freshPage(), 'b')).toBe(false);
+  setPanelDismissed(freshPage(), 'a', false);
+  expect(isPanelDismissed(freshPage(), 'a')).toBe(false);
+});
+
+it('clears the old preference when explicitly reopening before migration', () => {
+  sessionStorage.setItem('dsh-pptx-viewer.panel-dismissed.v1:a', '1');
+  setPanelDismissed(freshPage(), 'a', false);
+  expect(isPanelDismissed(freshPage(), 'a')).toBe(false);
+});
+
 it('suppresses automatic restoration when storage is blocked but allows explicit opens', () => {
   const doc = freshPage();
   const storage = doc.defaultView?.sessionStorage;

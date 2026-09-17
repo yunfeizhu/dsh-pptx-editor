@@ -76,10 +76,10 @@ parity.
 
 ## Distribution decision (2026-09-16)
 
-Prepare the first standard DSH bundle as `dsh-pptx-viewer@0.1.0`. The packed
-`cordis.patch.yml` resolves the installed package by name; the development
-`dsh.patch.yml` continues to resolve the local build. Shipping both loading
-mechanisms does not mean they should be enabled together.
+Prepare the first standard DSH bundle under the previous package name at
+`0.1.0`. The packed `cordis.patch.yml` resolves the installed package by name;
+the development `dsh.patch.yml` continues to resolve the local build. Shipping
+both loading mechanisms does not mean they should be enabled together.
 
 The editor, including the pinned component compatibility patch, is compiled into
 browser assets. Browser-only dependencies are development dependencies; Zod is
@@ -193,3 +193,14 @@ Alternatives considered: rewriting branch history leaves GitHub-managed PR
 references; reusing old release artifacts would associate them with a different
 source history. A fresh repository loses its old collaboration records and
 requires new CI evidence, but makes the public commit baseline explicit.
+
+## Rename the public package (2026-09-17)
+
+Use `dsh-pptx-editor` for the repository, npm package, DSH host/client
+identifiers, internal event namespaces and release artifact checks. The first
+intended release under this name is 1.0.0; preparing a build does not authorize
+publishing a tag, GitHub Release or npm package. Keep upstream component package
+names unchanged. The old npm package remains separate and must be removed before
+loading the renamed plugin. Preserve native browser AutoSave recovery keys and
+migrate explicit panel-dismissal preferences so renaming does not discard
+recovery data or reopen deliberately closed panels.

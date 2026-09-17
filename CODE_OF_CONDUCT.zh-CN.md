@@ -2,7 +2,7 @@
 
 [English](CODE_OF_CONDUCT.md) | [简体中文](CODE_OF_CONDUCT.zh-CN.md)
 
-dsh-pptx-viewer 希望建立友善、尊重他人并重视技术证据的社区。本准则适用于项目维护的 Issue、PR、讨论及其他社区空间。
+dsh-pptx-editor 希望建立友善、尊重他人并重视技术证据的社区。本准则适用于项目维护的 Issue、PR、讨论及其他社区空间。
 
 ## 期望的行为
 
@@ -18,6 +18,6 @@ dsh-pptx-viewer 希望建立友善、尊重他人并重视技术证据的社区�
 ## 报告与处理
 
 需要私下向维护者报告时，请使用仓库的
-[私密报告表单](https://github.com/yunfeizhu/dsh-pptx-viewer/security/advisories/new)。如果表单不可用，可提交仅请求私密联系方式的 Issue，不填写姓名、指控或其他敏感细节。不要在 Issue 或 PR 中公开私人证据。
+[私密报告表单](https://github.com/yunfeizhu/dsh-pptx-editor/security/advisories/new)。如果表单不可用，可提交仅请求私密联系方式的 Issue，不填写姓名、指控或其他敏感细节。不要在 Issue 或 PR 中公开私人证据。
 
 维护者可根据需要移除内容、限制参与或禁止参与，以保护社区。处理应与问题程度相称、私下留档，并且不得报复善意报告者。

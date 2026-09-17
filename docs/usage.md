@@ -1,35 +1,40 @@
-# Using dsh-pptx-viewer
+# Using dsh-pptx-editor
 
 [English](usage.md) · [简体中文](usage.zh-CN.md)
 
-## Install 0.2.0
+## Install 1.0.0
 
-Install Node 24 and configure DeepSeek Harness first. Then install the plugin
-into the Web profile:
+**This version is not yet published on GitHub Releases or npm.** Install Node 24
+and configure DeepSeek Harness, then build the package from source:
 
 ```sh
-dsh plugin --profile web add dsh-pptx-viewer@0.2.0
+git clone https://github.com/yunfeizhu/dsh-pptx-editor.git
+cd dsh-pptx-editor
+corepack enable
+pnpm install --frozen-lockfile
+pnpm build
+pnpm check:package
+dsh plugin --profile web add ./.cache/packages/dsh-pptx-editor-1.0.0.tgz
 dsh web
 ```
 
-Save any open documents before restarting an already running DSH Web service.
-The package includes the host plugin, browser client and editor assets; no
-source checkout or install-time build is required. Do not also load the source
-`dsh.patch.yml`, which would register the plugin twice.
+The package includes the host plugin, browser client and editor assets. Do not
+also load the source `dsh.patch.yml`, which would register the plugin twice.
+Future prebuilt packages will be available from
+[GitHub Releases](https://github.com/yunfeizhu/dsh-pptx-editor/releases); verify
+downloads against `SHA256SUMS.txt` before installation.
 
-The upcoming 1.0.0 build contains the same plugin runtime with rebuilt
-repository history. It is not yet released on GitHub or npm. After a release is
-published, download its prebuilt tarball from
-[GitHub Releases](https://github.com/yunfeizhu/dsh-pptx-viewer/releases):
+### Migrate from the previous name
 
-```sh
-dsh plugin --profile web add ./dsh-pptx-viewer-1.0.0.tgz
-dsh web
-```
+Save open documents and stop DSH Web first. If you installed the old package,
+run `dsh plugin --profile web remove dsh-pptx-viewer`, then install the new
+package and restart DSH Web. Existing npm packages keep their original name and
+version; this rename does not replace them. Browser AutoSave recovery
+identifiers remain unchanged.
 
-Verify the downloaded file against the release's `SHA256SUMS.txt` first. To
-remove the plugin, run `dsh plugin --profile web remove dsh-pptx-viewer`, then
-restart DSH Web. Removing the plugin does not delete browser recovery data.
+To remove the new package, run
+`dsh plugin --profile web remove dsh-pptx-editor`, then restart DSH Web. Removal
+does not delete browser recovery data.
 
 ## Run from source
 
@@ -42,9 +47,9 @@ pnpm dev
 ```
 
 The host compatibility baseline is DSH CLI `0.1.5-rc.1` with public plugin
-packages `0.1.5-rc.2`. Plugin `0.2.0` / `1.0.0` bundles `pptx-react-viewer`
-`3.19.2`. The source launch patch registers the local build; removing it from
-the launch command disables that build.
+packages `0.1.5-rc.2`. Plugin `1.0.0` bundles `pptx-react-viewer` `3.19.2`. The
+source launch patch registers the local build; removing it from the launch
+command disables that build.
 
 To keep development separate from your normal DSH configuration:
 

@@ -2,12 +2,12 @@ import type { AttachmentIntent } from './attachments.js';
 import type { AttachmentWatchState } from './chat-attachments.js';
 import { isPanelDismissed, setPanelDismissed } from './panel-dismissal.js';
 
-const key = Symbol.for('dsh-pptx-viewer.attachments.v1');
-const changed = 'dsh-pptx-viewer:attachment';
-const navigatedKey = Symbol.for('dsh-pptx-viewer.attachment-navigation.v2');
-const reopenKey = Symbol.for('dsh-pptx-viewer.panel-open.v1');
-const reopenChanged = 'dsh-pptx-viewer:panel-open';
-const watchedKey = Symbol.for('dsh-pptx-viewer.attachment-watch.v1');
+const key = Symbol.for('dsh-pptx-editor.attachments.v1');
+const changed = 'dsh-pptx-editor:attachment';
+const navigatedKey = Symbol.for('dsh-pptx-editor.attachment-navigation.v2');
+const reopenKey = Symbol.for('dsh-pptx-editor.panel-open.v1');
+const reopenChanged = 'dsh-pptx-editor:panel-open';
+const watchedKey = Symbol.for('dsh-pptx-editor.attachment-watch.v1');
 
 /** History admission, like the editor itself, survives client-module reloads. */
 export function attachmentWatchState(doc: Document): AttachmentWatchState {

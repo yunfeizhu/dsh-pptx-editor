@@ -53,7 +53,7 @@ harness tests require a working runtime and permitted test data; report skipped
 live checks explicitly.
 
 For distribution changes, install
-`.cache/packages/dsh-pptx-viewer-<version>.tgz` into a fresh `DSH_HOME` with
+`.cache/packages/dsh-pptx-editor-<version>.tgz` into a fresh `DSH_HOME` with
 `dsh plugin --profile web add`, then inspect the composed config and boot the
 installed package. Do not use the source patch for this check: it would hide
 missing tarball contents. Keep this profile separate from normal conversations

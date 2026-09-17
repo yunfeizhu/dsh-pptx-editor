@@ -1,4 +1,4 @@
-# dsh-pptx-viewer Agent Guide
+# dsh-pptx-editor Agent Guide
 
 Read this file and the nearest subtree `AGENTS.md` before changing files.
 

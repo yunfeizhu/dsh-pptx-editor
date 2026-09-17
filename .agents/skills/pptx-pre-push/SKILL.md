@@ -1,7 +1,7 @@
 ---
 name: pptx-pre-push
 description:
-  Verify dsh-pptx-viewer changes and complete independent review before an
+  Verify dsh-pptx-editor changes and complete independent review before an
   authorized push or merge-readiness claim. Does not authorize remote changes.
 ---
 

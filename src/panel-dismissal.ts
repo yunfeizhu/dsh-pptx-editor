@@ -1,6 +1,8 @@
-const stateKey = Symbol.for('dsh-pptx-viewer.panel-dismissal.v1');
-const storagePrefix = 'dsh-pptx-viewer.panel-dismissed.v1:';
-const storageProbe = 'dsh-pptx-viewer.panel-dismissed.storage-probe.v1';
+const stateKey = Symbol.for('dsh-pptx-editor.panel-dismissal.v1');
+const storagePrefix = 'dsh-pptx-editor.panel-dismissed.v1:';
+const storageProbe = 'dsh-pptx-editor.panel-dismissed.storage-probe.v1';
+// Read the former package's preference once when upgrading to the editor name.
+const legacyStoragePrefix = 'dsh-pptx-viewer.panel-dismissed.v1:';
 
 interface PageState {
   dismissed: Map<string, boolean>;
@@ -34,6 +36,11 @@ export function isPanelDismissed(doc: Document, sessionId: string): boolean {
       storage?.setItem(storageProbe, '1');
       storage?.removeItem(storageProbe);
       value = storage?.getItem(storagePrefix + sessionId) === '1';
+      if (storage?.getItem(legacyStoragePrefix + sessionId) === '1') {
+        storage.setItem(storagePrefix + sessionId, '1');
+        storage.removeItem(legacyStoragePrefix + sessionId);
+        value = true;
+      }
     } catch {
       // If storage is blocked, do not surprise the user with history navigation.
       value = true;
@@ -56,6 +63,7 @@ export function setPanelDismissed(
     const storage = doc.defaultView?.sessionStorage;
     if (dismissed) storage?.setItem(storagePrefix + sessionId, '1');
     else storage?.removeItem(storagePrefix + sessionId);
+    storage?.removeItem(legacyStoragePrefix + sessionId);
   } catch {
     // Explicit opens still work in memory when browser storage is unavailable.
   }

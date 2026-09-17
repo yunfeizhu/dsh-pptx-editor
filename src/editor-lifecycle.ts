@@ -28,8 +28,8 @@ export function isEditorVisible(frame: Element | null): boolean {
   );
 }
 
-const barrierKey = Symbol.for('dsh-pptx-viewer.connection-barrier.v1');
-const closedKey = Symbol.for('dsh-pptx-viewer.editor-closed.v1');
+const barrierKey = Symbol.for('dsh-pptx-editor.connection-barrier.v1');
+const closedKey = Symbol.for('dsh-pptx-editor.editor-closed.v1');
 
 /** Remember tab closure even before the editor script has loaded. */
 export function isEditorClosed(frame: Element | null): boolean {

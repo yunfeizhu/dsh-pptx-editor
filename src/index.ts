@@ -46,7 +46,7 @@ function parseTool<T>(
   );
 }
 
-export const name = 'dsh-pptx-viewer';
+export const name = 'dsh-pptx-editor';
 export const inject = [
   'tools',
   'webServer',

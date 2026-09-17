@@ -1,7 +1,7 @@
 ---
 name: pptx-code-review
 description:
-  Review dsh-pptx-viewer changes for document state, direct editing, undo, save
+  Review dsh-pptx-editor changes for document state, direct editing, undo, save
   integrity, component compatibility, and workflow security. Use for a
   substantive diff review.
 ---

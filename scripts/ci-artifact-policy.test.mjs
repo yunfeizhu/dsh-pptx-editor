@@ -51,14 +51,14 @@ describe('release CI source', () => {
 describe('release artifact identity and bytes', () => {
   const expected = validateCiRun(run(), repository, commit);
   const bytes = Buffer.from('checked package');
-  const filename = 'dsh-pptx-viewer-0.1.2.tgz';
+  const filename = 'dsh-pptx-editor-0.1.2.tgz';
   const artifact = () => ({
     provenance: { ...expected },
     commitRecord: `${commit}\n`,
     sums: checksum(bytes, filename),
     bytes,
     filename,
-    pkg: { name: 'dsh-pptx-viewer', version: '0.1.2' },
+    pkg: { name: 'dsh-pptx-editor', version: '0.1.2' },
   });
   it('accepts the checked tarball for the approved target', () => {
     expect(() =>
@@ -74,8 +74,8 @@ describe('release artifact identity and bytes', () => {
     { sums: `${checksum(bytes, filename)}extra\n` },
     { filename: 'other.tgz' },
     { pkg: { name: 'another-package', version: '0.1.2' } },
-    { pkg: { name: 'dsh-pptx-viewer', version: '0.1.2', private: true } },
-    { pkg: { name: 'dsh-pptx-viewer', version: '0.1.3' } },
+    { pkg: { name: 'dsh-pptx-editor', version: '0.1.2', private: true } },
+    { pkg: { name: 'dsh-pptx-editor', version: '0.1.3' } },
   ])('rejects mismatched or tampered artifact %j', (change) => {
     expect(() =>
       validateCiArtifact({ ...artifact(), ...change }, expected, 'v0.1.2'),

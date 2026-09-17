@@ -13,7 +13,7 @@ runtime releases become available.
 
 Do not disclose suspected vulnerabilities in a public issue or PR. Use the
 repository's
-[private vulnerability reporting form](https://github.com/yunfeizhu/dsh-pptx-viewer/security/advisories/new)
+[private vulnerability reporting form](https://github.com/yunfeizhu/dsh-pptx-editor/security/advisories/new)
 under **Security → Advisories → Report a vulnerability** when available.
 
 If private reporting is unavailable, open an issue requesting a private security

@@ -91,11 +91,11 @@ it('seals and verifies an actual tarball, rejecting PR sealing and altered bytes
     mkdirSync(join(directory, '.cache/packages'), { recursive: true });
     writeFileSync(
       join(directory, 'package/package.json'),
-      JSON.stringify({ name: 'dsh-pptx-viewer', version: '0.1.2' }),
+      JSON.stringify({ name: 'dsh-pptx-editor', version: '0.1.2' }),
     );
     const tarball = join(
       directory,
-      '.cache/packages/dsh-pptx-viewer-0.1.2.tgz',
+      '.cache/packages/dsh-pptx-editor-0.1.2.tgz',
     );
     execFileSync('tar', ['-czf', tarball, '-C', directory, 'package']);
     expect(() => run('seal', { GITHUB_EVENT_NAME: 'pull_request' })).toThrow();

@@ -1,6 +1,6 @@
 ---
 version: alpha
-name: dsh-pptx-viewer
+name: dsh-pptx-editor
 description: A complete presentation editor beside an Agent conversation.
 colors:
   background: '#fff'

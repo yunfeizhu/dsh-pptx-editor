@@ -1,0 +1,5 @@
+interface:
+  display_name: 'PPTX Pre-Push'
+  short_description: 'Check scoped evidence and independent review'
+  default_prompt:
+    'Use $pptx-pre-push to verify this branch before an authorized push.'

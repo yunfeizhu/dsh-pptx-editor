@@ -1,0 +1,15 @@
+name: Documentation
+description: Report unclear or missing documentation
+title: '[Docs] '
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Use one language throughout this issue. English is preferred; Simplified
+        Chinese is also welcome. Do not repeat sections in both languages.
+  - type: textarea
+    id: documentation
+    attributes:
+      label: Page and proposed clarification
+    validations:
+      required: true

@@ -1,0 +1,16 @@
+name: Question
+description: Ask about documented behavior or configuration
+title: '[Question] '
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Use one language throughout this issue. English is preferred; Simplified
+        Chinese is also welcome. Do not repeat sections in both languages.
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: Include what you checked and omit private data.
+    validations:
+      required: true

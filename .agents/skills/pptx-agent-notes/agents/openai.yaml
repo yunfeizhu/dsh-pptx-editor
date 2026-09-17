@@ -1,0 +1,5 @@
+interface:
+  display_name: 'PPTX Agent Notes'
+  short_description: 'Record durable editing and workflow decisions'
+  default_prompt:
+    "Use $pptx-agent-notes to record or update this project's durable decision."

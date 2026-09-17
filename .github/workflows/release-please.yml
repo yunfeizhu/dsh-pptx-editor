@@ -1,0 +1,35 @@
+name: Release Please
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-please-main
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    name: Prepare release pull request
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+        with:
+          target-branch: main
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+          skip-github-release: true
+      - name: Explain repository permissions when release preparation fails
+        if: failure()
+        run: |
+          echo 'Release Please failed. Check its error above before retrying.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'If GitHub denied PR creation, a repository owner must enable Settings > Actions > General > Allow GitHub Actions to create and approve pull requests. Workflow scopes alone cannot enable this setting.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'This workflow does not change repository settings or bypass required PR checks.' >> "$GITHUB_STEP_SUMMARY"

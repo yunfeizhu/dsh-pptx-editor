@@ -1,0 +1,21 @@
+name: Feature request
+description: Propose a capability with an observable acceptance condition
+title: '[Feature] '
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Use one language throughout this issue. English is preferred; Simplified
+        Chinese is also welcome. Do not repeat sections in both languages.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria and alternatives
+    validations:
+      required: true

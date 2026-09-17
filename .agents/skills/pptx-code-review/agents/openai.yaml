@@ -1,0 +1,5 @@
+interface:
+  display_name: 'PPTX Code Review'
+  short_description: 'Review editor state, saves, and automation'
+  default_prompt:
+    'Use $pptx-code-review to review the complete current task diff.'

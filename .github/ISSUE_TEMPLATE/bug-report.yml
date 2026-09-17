@@ -1,0 +1,25 @@
+name: Bug report
+description: Report an observable component or integration failure
+title: '[Bug] '
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Use one language throughout this issue. English is preferred; Simplified
+        Chinese is also welcome. Do not repeat sections in both languages.
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Include plugin, viewer, harness, and runtime versions.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description:
+        Provide steps and expected/actual behavior. Use synthetic files and
+        redact private data.
+    validations:
+      required: true

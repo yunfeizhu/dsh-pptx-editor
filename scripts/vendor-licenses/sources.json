@@ -7,6 +7,10 @@
     "file": "ai-sdk-provider-utils-5.0.40.txt",
     "source": "https://raw.githubusercontent.com/vercel/ai/9ed46d2da5df1394079c66d422bc553fd0c34376/LICENSE"
   },
+  "@ai-sdk/provider-utils@5.0.43": {
+    "file": "ai-sdk-provider-utils-5.0.43.txt",
+    "source": "https://raw.githubusercontent.com/vercel/ai/1a82df1c7b6239f4cefe9fb73c357b3a6529c629/LICENSE"
+  },
   "pptx-viewer-mcp@2.5.2": {
     "file": "pptx-viewer-mcp-2.5.2.txt",
     "source": "https://raw.githubusercontent.com/ChristopherVR/pptx-viewer/848349fc7e281caa865b0ff874ac8bc7cfb65338/LICENSE"
